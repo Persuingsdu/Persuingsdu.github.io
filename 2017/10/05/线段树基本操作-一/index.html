@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://Persuingsdu.github.io">
-  <title>Archives: 2017/10 | Persuing</title>
+  <title>线段树基本操作(一) | Persuing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Persuing">
-<meta property="og:url" content="http://Persuingsdu.github.io/archives/2017/10/index.html">
+  <meta name="description" content="国庆作业的需要，今晚学习了一下线段树的基本操作——建树,区间查询,单点更新后续学习区间更新及更多的知识,此处只放代码。主要参考此文章 数据结构——线段树 1.建树首先写一个函数,该函数用来更新父节点,指明父节点与左子树与右子树的关系void pushup(int i) {    segTree[i] = max(segTree[2  i],segTree[2  i + 1]);}这里面的关系是可以">
+<meta name="keywords" content="数据结构,ACM,线段树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线段树基本操作(一)">
+<meta property="og:url" content="http://Persuingsdu.github.io/2017/10/05/线段树基本操作-一/index.html">
 <meta property="og:site_name" content="Persuing">
+<meta property="og:description" content="国庆作业的需要，今晚学习了一下线段树的基本操作——建树,区间查询,单点更新后续学习区间更新及更多的知识,此处只放代码。主要参考此文章 数据结构——线段树 1.建树首先写一个函数,该函数用来更新父节点,指明父节点与左子树与右子树的关系void pushup(int i) {    segTree[i] = max(segTree[2  i],segTree[2  i + 1]);}这里面的关系是可以">
+<meta property="og:updated_time" content="2017-10-05T15:37:44.716Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Persuing">
+<meta name="twitter:title" content="线段树基本操作(一)">
+<meta name="twitter:description" content="国庆作业的需要，今晚学习了一下线段树的基本操作——建树,区间查询,单点更新后续学习区间更新及更多的知识,此处只放代码。主要参考此文章 数据结构——线段树 1.建树首先写一个函数,该函数用来更新父节点,指明父节点与左子树与右子树的关系void pushup(int i) {    segTree[i] = max(segTree[2  i],segTree[2  i + 1]);}这里面的关系是可以">
   
   
     <link rel="icon" href="/favicon.png">
@@ -129,36 +134,100 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-线段树基本操作-一" class="article article-type-post " itemscope itemprop="blogPost">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/05/线段树基本操作-一/" class="archive-article-date">
-  	<time datetime="2017-10-05T14:44:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-05</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/05/线段树基本操作-一/">线段树基本操作(一)</a>
+  
+  
+  
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      线段树基本操作(一)
     </h1>
   
 
-        <div class="article-info info-on-right">
+        
+        <a href="/2017/10/05/线段树基本操作-一/" class="archive-article-date">
+  	<time datetime="2017-10-05T14:44:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-05</time>
+</a>
+        
+      </header>
+
+      
+
+
+
+
+
+
+
+
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=26508240&auto=1&height=66"></iframe><br>国庆作业的需要，今晚学习了一下线段树的基本操作——建树,区间查询,单点更新<br>后续学习区间更新及更多的知识,此处只放代码。<br>主要参考此文章 <a href="http://blog.csdn.net/metalseed/article/details/8039326" target="_blank" rel="external">数据结构——线段树</a></p>
+<h2 id="1-建树"><a href="#1-建树" class="headerlink" title="1.建树"></a>1.建树</h2><p>首先写一个函数,该函数用来更新父节点,指明父节点与左子树与右子树的关系<br><code><br>void pushup(int i) {<br>    segTree[i] = max(segTree[2 <em> i],segTree[2 </em> i + 1]);<br>}</code><br>这里面的关系是可以自定义,可以进行求和,求最小值等等操作,这里选择了最大值作为示例<br><code><br>//利用递归建树<br>void build(int i, int l, int r) {<br>    if (l == r)<br>        segTree[i] = value[l];<br>    else {<br>        //递归构造左右子树<br>        build(2 <em> i, l, (l + r) / 2);<br>        build(2 </em> i + 1, (l + r) / 2 + 1, r);<br>        pushup(i);//回溯更新父节点<br>    }<br>}</code></p>
+<h2 id="2-区间查询"><a href="#2-区间查询" class="headerlink" title="2.区间查询"></a>2.区间查询</h2><p>i代表查询的结点,(b,e)代表该结点的范围,(l,r)代表查询结点的范围<br>注意该函数的return值要与pushup更新父节点的目的匹配,此处就是返回该区间的最大值<br><code><br>int query(int i, int b, int e, int l, int r) {<br>    int p1, p2;<br>    if (l &gt; e||r &lt; b) return INT_MIN; //无交集<br>    if (b &gt;= l&amp;&amp;e &lt;= r) return segTree[i]; //需要查询的区间大于i存储的区间<br>    p1 = query(2 <em> i, b, (b + e) / 2, l, r);<br>    p2 = query(2 </em> i + 1, (b + e) / 2 + 1, e, l, r);<br>    return max(p1, p2);<br>}</code></p>
+<h2 id="3-单节点更新"><a href="#3-单节点更新" class="headerlink" title="3.单节点更新"></a>3.单节点更新</h2><p>i代表结点,(b,e)代表该节点的范围,p代表我们要更新的结点位置,v代表要递增的数值<br><code><br>void update_single(int i, int b, int e, int p, int v) {<br>    if (b == e) { segTree[i] += v; return; }<br>    int m = (b + e) / 2;<br>    if (p &lt;= m) update_single(2 <em> i, b, m, p, v);<br>    else update_single(2 </em> i + 1, m + 1, e, p, v);<br>    pushup(i);//回溯更新<br>}</code><br>特别注意,在实际用中,空间要开4*N </p>
+<h2 id="调试代码"><a href="#调试代码" class="headerlink" title="调试代码"></a>调试代码</h2><p><code><br>const int maxn = 256;<br>int segTree[4 <em> maxn + 10];<br>int value[maxn];<br>int main() {<br>    //开的空间为4</em>N<br>    value[0] = 1; value[1] = 2; value[2] = 2;<br>    value[3] = 4; value[4] = 9; value[5] = 3;<br>    build(1, 0, 5);<br>    for (int i = 1; i &lt;= 20; i++)<br>        cout &lt;&lt; “seg “ &lt;&lt; i &lt;&lt; “=” &lt;&lt; segTree[i] &lt;&lt; endl;<br>    //我们定义pushup得到的最终结果便是segTree[1]<br>    update_single(1, 0, 5, 3, 8);<br>    query(1, 0, 5, 2, 4);<br>}</code></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+
+            
+
+
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>Thank u !<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.png">
+                      <span class="reward-type">微信</span>
+                      
+                      <span id="busuanzi_container_page_pv" font="宋体" style="color:pink; display:inline">
+                        View  <span id="busuanzi_value_page_pv" font="宋体" style="color:pink"></span>
+                     </span>
           
+                  
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+
+
+    
+
+
+
+
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -178,95 +247,109 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://Persuingsdu.github.io/2017/10/05/线段树基本操作-一/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/05/关于郑州的记忆/" class="archive-article-date">
-  	<time datetime="2017-10-05T07:33:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-05</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/05/关于郑州的记忆/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于郑州的记忆</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/05/关于郑州的记忆/">关于郑州的记忆</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">伪文艺</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/04/My-first-blog/" class="archive-article-date">
-  	<time datetime="2017-10-04T14:00:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/04/My-first-blog/">My first blog</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">生活杂感</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -299,8 +382,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
