@@ -169,12 +169,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=26508240&auto=1&height=66"></iframe><br>国庆作业的需要，今晚学习了一下线段树的基本操作——建树,区间查询,单点更新<br>后续学习区间更新及更多的知识,此处只放代码。<br>主要参考此文章 <a href="http://blog.csdn.net/metalseed/article/details/8039326" target="_blank" rel="external">数据结构——线段树</a></p>
-<h2 id="1-建树"><a href="#1-建树" class="headerlink" title="1.建树"></a>1.建树</h2><p>首先写一个函数,该函数用来更新父节点,指明父节点与左子树与右子树的关系<br><code><br>void pushup(int i) {<br>    segTree[i] = max(segTree[2 <em> i],segTree[2 </em> i + 1]);<br>}</code><br>这里面的关系是可以自定义,可以进行求和,求最小值等等操作,这里选择了最大值作为示例<br><code><br>//利用递归建树<br>void build(int i, int l, int r) {<br>    if (l == r)<br>        segTree[i] = value[l];<br>    else {<br>        //递归构造左右子树<br>        build(2 <em> i, l, (l + r) / 2);<br>        build(2 </em> i + 1, (l + r) / 2 + 1, r);<br>        pushup(i);//回溯更新父节点<br>    }<br>}</code></p>
-<h2 id="2-区间查询"><a href="#2-区间查询" class="headerlink" title="2.区间查询"></a>2.区间查询</h2><p>i代表查询的结点,(b,e)代表该结点的范围,(l,r)代表查询结点的范围<br>注意该函数的return值要与pushup更新父节点的目的匹配,此处就是返回该区间的最大值<br><code><br>int query(int i, int b, int e, int l, int r) {<br>    int p1, p2;<br>    if (l &gt; e||r &lt; b) return INT_MIN; //无交集<br>    if (b &gt;= l&amp;&amp;e &lt;= r) return segTree[i]; //需要查询的区间大于i存储的区间<br>    p1 = query(2 <em> i, b, (b + e) / 2, l, r);<br>    p2 = query(2 </em> i + 1, (b + e) / 2 + 1, e, l, r);<br>    return max(p1, p2);<br>}</code></p>
-<h2 id="3-单节点更新"><a href="#3-单节点更新" class="headerlink" title="3.单节点更新"></a>3.单节点更新</h2><p>i代表结点,(b,e)代表该节点的范围,p代表我们要更新的结点位置,v代表要递增的数值<br><code><br>void update_single(int i, int b, int e, int p, int v) {<br>    if (b == e) { segTree[i] += v; return; }<br>    int m = (b + e) / 2;<br>    if (p &lt;= m) update_single(2 <em> i, b, m, p, v);<br>    else update_single(2 </em> i + 1, m + 1, e, p, v);<br>    pushup(i);//回溯更新<br>}</code><br>特别注意,在实际用中,空间要开4*N </p>
-<h2 id="调试代码"><a href="#调试代码" class="headerlink" title="调试代码"></a>调试代码</h2><p><code><br>const int maxn = 256;<br>int segTree[4 <em> maxn + 10];<br>int value[maxn];<br>int main() {<br>    //开的空间为4</em>N<br>    value[0] = 1; value[1] = 2; value[2] = 2;<br>    value[3] = 4; value[4] = 9; value[5] = 3;<br>    build(1, 0, 5);<br>    for (int i = 1; i &lt;= 20; i++)<br>        cout &lt;&lt; “seg “ &lt;&lt; i &lt;&lt; “=” &lt;&lt; segTree[i] &lt;&lt; endl;<br>    //我们定义pushup得到的最终结果便是segTree[1]<br>    update_single(1, 0, 5, 3, 8);<br>    query(1, 0, 5, 2, 4);<br>}</code></p>
-
+        <p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=26508240&auto=1&height=66"></iframe><br>国庆作业的需要，今晚学习了一下线段树的基本操作——建树,区间查询,单点更新<br>后续学习区间更新及更多的知识,此处只放代码。<br>主要参考此文章 <a href="http://blog.csdn.net/metalseed/article/details/8039326" target="_blank" rel="external">数据结构——线段树</a><br>
+        
+          <a class="article-more-a" href="/2017/10/05/线段树基本操作-一/#more">more >></a>
+        
       
 
       
@@ -553,10 +551,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">伪文艺</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -566,6 +560,10 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">伪文艺</a>
               </li>
             
             <div class="clearfix"></div>
