@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://Persuingsdu.github.io">
   <title>something about 数据库 | Persuing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="下午回了学校，还下着雨。晚上去上自习，结果发现空空荡荡的。放假前，数据库听的云里雾里。今晚又没带笔，所以照着书本，敲了一些知识点真是有闲功夫，晚上总结数据库的东西。明天再写数据库的作业。">
+  <meta name="description" content="下午回了学校，还下着雨。晚上去上自习，结果发现空空荡荡的。放假前，数据库听的云里雾里。今晚又没带笔，所以照着书本，敲了一些知识点真是有闲功夫，晚上总结数据库的东西。明天再写数据库的作业。 3.5 集合的运算1.并运算 unionunion 运算自动去重，想要保留所有的重复用union all代替。2.交运算 intersectintersect运算自动去重，用intersect all保留所有的">
 <meta name="keywords" content="数据库,sql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="something about 数据库">
 <meta property="og:url" content="http://Persuingsdu.github.io/2017/10/08/数据库base/index.html">
 <meta property="og:site_name" content="Persuing">
-<meta property="og:description" content="下午回了学校，还下着雨。晚上去上自习，结果发现空空荡荡的。放假前，数据库听的云里雾里。今晚又没带笔，所以照着书本，敲了一些知识点真是有闲功夫，晚上总结数据库的东西。明天再写数据库的作业。">
+<meta property="og:description" content="下午回了学校，还下着雨。晚上去上自习，结果发现空空荡荡的。放假前，数据库听的云里雾里。今晚又没带笔，所以照着书本，敲了一些知识点真是有闲功夫，晚上总结数据库的东西。明天再写数据库的作业。 3.5 集合的运算1.并运算 unionunion 运算自动去重，想要保留所有的重复用union all代替。2.交运算 intersectintersect运算自动去重，用intersect all保留所有的">
 <meta property="og:image" content="http://persuingsdu.github.io/img/图片1.png">
-<meta property="og:updated_time" content="2017-10-08T13:40:25.803Z">
+<meta property="og:updated_time" content="2017-10-13T05:01:23.550Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="something about 数据库">
-<meta name="twitter:description" content="下午回了学校，还下着雨。晚上去上自习，结果发现空空荡荡的。放假前，数据库听的云里雾里。今晚又没带笔，所以照着书本，敲了一些知识点真是有闲功夫，晚上总结数据库的东西。明天再写数据库的作业。">
+<meta name="twitter:description" content="下午回了学校，还下着雨。晚上去上自习，结果发现空空荡荡的。放假前，数据库听的云里雾里。今晚又没带笔，所以照着书本，敲了一些知识点真是有闲功夫，晚上总结数据库的东西。明天再写数据库的作业。 3.5 集合的运算1.并运算 unionunion 运算自动去重，想要保留所有的重复用union all代替。2.交运算 intersectintersect运算自动去重，用intersect all保留所有的">
 <meta name="twitter:image" content="http://persuingsdu.github.io/img/图片1.png">
   
   
@@ -174,7 +174,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/img/图片1.png" alt="空荡荡的自习室"><br>下午回了学校，还下着雨。晚上去上自习，结果发现空空荡荡的。<br>放假前，数据库听的云里雾里。今晚又没带笔，所以照着书本，敲了一些知识点<br>真是有闲功夫，晚上总结数据库的东西。<br>明天再写数据库的作业。<br><a id="more"></a></p>
+        <a id="more"></a>
+<p><img src="/img/图片1.png" alt="空荡荡的自习室"><br>下午回了学校，还下着雨。晚上去上自习，结果发现空空荡荡的。<br>放假前，数据库听的云里雾里。今晚又没带笔，所以照着书本，敲了一些知识点<br>真是有闲功夫，晚上总结数据库的东西。<br>明天再写数据库的作业。</p>
 <h2 id="3-5-集合的运算"><a href="#3-5-集合的运算" class="headerlink" title="3.5 集合的运算"></a>3.5 集合的运算</h2><p><strong>1.并运算 union</strong><br>union 运算自动去重，想要保留所有的重复用union all代替。<br><strong>2.交运算 intersect</strong><br>intersect运算自动去重，用intersect all保留所有的重复，并且在结果中出现的重复元组数等于在c1和c2中出现重复次数最少的那个。<br><strong>3.差运算</strong><br>except运算从其第一个输入中输出所有不出现在第二个输入中的元组，此运算在执行集差操作之前自动去除输入中的重复。<br>用except保留所有的重复。c1中出现了N次，c2中出现了M次，在结果中出现N-M次，前提N-M为正数。</p>
 <h2 id="3-6-空值"><a href="#3-6-空值" class="headerlink" title="3.6 空值"></a>3.6 空值</h2><p>SQL在谓词中使用某些特殊的关键词null测试空值。因而为找出instructor关系中salary为空值的所有教师，我们可以写成：<br><code><br>select name<br>from instructor<br>where salary is null;<br></code><br>当一个查询使用select distinct子句时，重复元组将被去除。<br>注意上述对待空值的方式与谓词中对待空值的方式是不同的，在谓词中”null=null”会返回unknown而不是true。</p>
 <h2 id="3-7-聚集函数"><a href="#3-7-聚集函数" class="headerlink" title="3.7 聚集函数"></a>3.7 聚集函数</h2><p><strong>定义：</strong>聚集函数是以值的一个集合（集或多重集）为输入，返回单个值的函数。<br>avg sum 的输入集必须是数字集，min max count<br>在计算平均值时保留重复元组是很重要的，而有些情况下计算聚集函数需删掉重复元组，可以在聚集表达式中使用关键词distinct。<br><strong>分组聚集</strong><br>将聚集函数作用到一组元组集上，可以用group by子句来实现，group by子句中给出的一个或多个属性是用来构造分组的，在group by子句中的所有属性上取值相同的元组将被分在一个组中。分组是计算查询结果的第一步，在每个分组上都要进行指定的聚集计算。<br>需要注意的是：任何没有出现在group by子句中属性如果出现在select子句中的话，只能出现在聚集函数的内部。<br><strong>having子句</strong><br>有时对分组限定条件比对元组限定条件更有用。注意：having子句中的谓词在形成分组后才起作用。</p>
@@ -182,6 +183,19 @@
 <p><strong>重复元组存在性测试</strong><br>unique谓词在空集上计算出真值<br>用一个例子来说明unique的使用<br><code><br>找出所有在2009年最多开设一次的课程<br>select T.course_id<br>from course as T<br>where unique (select S.course_id<br>              from course as S<br>              where T.course_id=S.course_id<br>              and year=’2009’）<br>等价于<br>select T.course_id<br>from course as T<br>where 1&gt;= (select count(S.course_id)<br>           from course as S<br>           where T.course_id=S.course_id<br>           and year=’2009’）<br></code><br><strong>from子句中的子查询</strong></p>
 <p><strong>with子句</strong><br>提供定义临时关系的方法,以例子作为说明<br><code><br>查出所有工资总额大于所有系平均工资总额的系<br>with dept_total (dept_name,value) as<br>     (select dept_name,sum(salary)<br>      from instructor<br>      group by dept_name),<br>      dept_total_avg （value) as<br>     (select avg(value)<br>      from dept_total）<br>select dept_name<br>from dept_total,dept_total_avg<br>where dept_total.value&gt;=dept_total_avg.value;<br></code></p>
 <p>回宿舍….总结完数据库的修改就不再总结</p>
+<script>
+ if("123456789"==prompt("密码")){
+     alert("ok");
+ }
+ else{
+     alert("wrong");
+     location="www.sdu1901.top";
+ }
+ </script>
+
+
+
+
 
       
 
@@ -447,6 +461,18 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">生活杂感</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">sql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">伪文艺</a>
               </li>
              
@@ -459,23 +485,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ACM</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线段树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">生活杂感</a>
               </li>
             
             <div class="clearfix"></div>
