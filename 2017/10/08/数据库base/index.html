@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Persuing">
 <meta property="og:description" content="下午回了学校，还下着雨。晚上去上自习，结果发现空空荡荡的。放假前，数据库听的云里雾里。今晚又没带笔，所以照着书本，敲了一些知识点真是有闲功夫，晚上总结数据库的东西。明天再写数据库的作业。 3.5 集合的运算1.并运算 unionunion 运算自动去重，想要保留所有的重复用union all代替。2.交运算 intersectintersect运算自动去重，用intersect all保留所有的">
 <meta property="og:image" content="http://persuingsdu.github.io/img/图片1.png">
-<meta property="og:updated_time" content="2017-10-13T05:01:23.550Z">
+<meta property="og:updated_time" content="2017-10-13T05:05:17.618Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="something about 数据库">
 <meta name="twitter:description" content="下午回了学校，还下着雨。晚上去上自习，结果发现空空荡荡的。放假前，数据库听的云里雾里。今晚又没带笔，所以照着书本，敲了一些知识点真是有闲功夫，晚上总结数据库的东西。明天再写数据库的作业。 3.5 集合的运算1.并运算 unionunion 运算自动去重，想要保留所有的重复用union all代替。2.交运算 intersectintersect运算自动去重，用intersect all保留所有的">
@@ -183,19 +183,6 @@
 <p><strong>重复元组存在性测试</strong><br>unique谓词在空集上计算出真值<br>用一个例子来说明unique的使用<br><code><br>找出所有在2009年最多开设一次的课程<br>select T.course_id<br>from course as T<br>where unique (select S.course_id<br>              from course as S<br>              where T.course_id=S.course_id<br>              and year=’2009’）<br>等价于<br>select T.course_id<br>from course as T<br>where 1&gt;= (select count(S.course_id)<br>           from course as S<br>           where T.course_id=S.course_id<br>           and year=’2009’）<br></code><br><strong>from子句中的子查询</strong></p>
 <p><strong>with子句</strong><br>提供定义临时关系的方法,以例子作为说明<br><code><br>查出所有工资总额大于所有系平均工资总额的系<br>with dept_total (dept_name,value) as<br>     (select dept_name,sum(salary)<br>      from instructor<br>      group by dept_name),<br>      dept_total_avg （value) as<br>     (select avg(value)<br>      from dept_total）<br>select dept_name<br>from dept_total,dept_total_avg<br>where dept_total.value&gt;=dept_total_avg.value;<br></code></p>
 <p>回宿舍….总结完数据库的修改就不再总结</p>
-<script>
- if("123456789"==prompt("密码")){
-     alert("ok");
- }
- else{
-     alert("wrong");
-     location="www.sdu1901.top";
- }
- </script>
-
-
-
-
 
       
 
@@ -465,11 +452,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sql</a>
+                <a href="javascript:void(0)" class="js-tag color4">并查集</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -477,11 +464,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">并查集</a>
+                <a href="javascript:void(0)" class="js-tag color4">sql</a>
               </li>
              
               <li class="article-tag-list-item">
