@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://Persuingsdu.github.io/2017/10/15/DFS/index.html">
 <meta property="og:site_name" content="Persuing">
 <meta property="og:description" content="2017/10/21更新于图书馆">
-<meta property="og:updated_time" content="2017-10-21T09:36:26.344Z">
+<meta property="og:updated_time" content="2017-10-21T09:45:30.291Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode">
 <meta name="twitter:description" content="2017/10/21更新于图书馆">
@@ -175,12 +175,12 @@
         <p><strong><em>2017/10/21更新于图书馆</em></strong></p>
 <a id="more"></a>
 <p><a href="https://leetcode.com/problems/maximum-binary-tree/description/" target="_blank" rel="external">Maximum Binary Tree </a> 递归建树<br><a href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/description/" target="_blank" rel="external">Populating Next Right Pointers in Each Node II </a> bfs<br><a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/description/" target="_blank" rel="external">Maximum Depth of Binary Tree</a> dfs<br><a href="https://leetcode.com/problems/binary-tree-right-side-view/description/" target="_blank" rel="external">Binary Tree Right Side View </a> dfs / bfs</p>
-<p><strong><em>2017/10/20更新于图书馆</em></strong><br>做了几道题目之后，感觉也不是很难，Leetcode上关于树的递归程序大致可以编写为:<br><code><br>void dfs(TreeNode* root){<br>    …<br>    if(root-&gt;left){<br>        …<br>        dfs(root-&gt;left);<br>        …<br>    }<br>    if(root-&gt;right){<br>        …<br>        dfs(root-&gt;right);<br>        …<br>    }<br>    …<br>}</code><br>大致结构如上，然后选择较小的数据，跟着程序走一遍，修正条件，即可。</p>
+<p><strong><em>2017/10/20更新于图书馆</em></strong><br>Leetcode上关于树的递归程序大致可以编写为:<br><code><br>void dfs(TreeNode* root){<br>    …<br>    if(root-&gt;left){<br>        …<br>        dfs(root-&gt;left);<br>        …<br>    }<br>    if(root-&gt;right){<br>        …<br>        dfs(root-&gt;right);<br>        …<br>    }<br>    …<br>}</code><br>大致结构如上，然后选择较小的数据，跟着程序走一遍，修正条件，即可。<br>这样的做法可以解决大多数的关于树的dfs问题，关键是找寻更优解。</p>
 <p><strong><em>下面是关于树的bfs与dfs</em></strong></p>
 <h2 id="dfs-输出每条路径"><a href="#dfs-输出每条路径" class="headerlink" title="dfs 输出每条路径"></a>dfs 输出每条路径</h2><p>如下面的题目所述，不再赘述。</p>
 <h2 id="bfs-分行输出每行row中所有节点的值"><a href="#bfs-分行输出每行row中所有节点的值" class="headerlink" title="bfs 分行输出每行row中所有节点的值"></a>bfs 分行输出每行row中所有节点的值</h2><p>代码如下<br><code><br>vector<vector<int>&gt; zigzagLevelOrder(TreeNode<em> root) {<br>    vector<vector<int>&gt; ans;<br>    queue&lt;TreeNode</vector<int></em>&gt; unvisted;<br>    if (root == NULL) return ans;<br>    int count = 1; int child = 0;<br>    unvisted.push(root);<br>    while (!unvisted.empty()) {<br>        vector<int> element;<br>        while (count–) {<br>            TreeNode* current = unvisted.front();<br>            unvisted.pop();<br>            element.push_back(current-&gt;val);<br>            if (current-&gt;left) {<br>                unvisted.push(current-&gt;left);<br>                child++;<br>            }<br>            if (current-&gt;right) {<br>                unvisted.push(current-&gt;right);<br>                child++;<br>            }<br>        }<br>        ans.push_back(element);<br>        count = child;<br>        child = 0;<br>    }<br>    return ans;<br>}</int></vector<int></code></p>
 <p><strong><em>在做一个题目时发现理解错了题目，于是弄出了一道新题目</em></strong><br><a href="https://leetcode.com/problems/find-bottom-left-tree-value/description/" target="_blank" rel="external">原题</a><br>经过几次Wrong Answer之后，发现理解错了题意…<br>于是意外地产生了一道新题：<br>输出存在左叶子节点的深度最深处的一层最左边的左叶子节点的值(有点绕….)代码如下：<br>注意每次递归调用结束后，回溯更新<br><code><br>int depth = 0;<br>int times = 1;<br>int leftmost;<br>int findBottomLeftValue(TreeNode* root) {<br>    if (root-&gt;left &amp;&amp; !root-&gt;left-&gt;left &amp;&amp; !root-&gt;left-&gt;right) {<br>        if (times &gt; depth)<br>            leftmost = root-&gt;left-&gt;val;<br>    }<br>    if (!root-&gt;left &amp;&amp; !root-&gt;right) {<br>        times–;<br>        return leftmost;<br>    }<br>    if (root-&gt;left) {<br>        times++;<br>        findBottomLeftValue(root-&gt;left);<br>    }<br>    if (root-&gt;right) {<br>        times++;<br>        findBottomLeftValue(root-&gt;right);<br>    }<br>    times–;<br>    return leftmost;<br>}</code></p>
-<p>————原文如下————<br>这篇文章用来总结Leetcode上与dfs相关的题目，方法不是最佳，以后更新。<br>因为不太会编写递归程序，故今天在leetcode上，做了三道和dfs的题目，均利用递归解决，总结如下：<br>与树相关的struct结构，如下定义<br><code><br>struct TreeNode {<br>    int val;<br>    TreeNode <em>left;<br>    TreeNode </em>right;<br>    TreeNode(int x) : val(x), left(NULL), right(NULL) {}<br>};</code></p>
+<p>————原文如下————<br>这篇文章用来总结Leetcode上与dfs相关的题目，方法不是最佳，以后更新。<br>与树相关的struct结构，如下定义<br><code><br>struct TreeNode {<br>    int val;<br>    TreeNode <em>left;<br>    TreeNode </em>right;<br>    TreeNode(int x) : val(x), left(NULL), right(NULL) {}<br>};</code></p>
 <h2 id="Path-Sum"><a href="#Path-Sum" class="headerlink" title="Path Sum"></a>Path Sum</h2><p><a href="https://leetcode.com/problems/path-sum/description/" target="_blank" rel="external">link</a><br><code><br>bool ans;<br>bool hasPathSum(TreeNode* root, int sum) {<br>        if (root == NULL) return false;<br>        if (root-&gt;left == NULL&amp;&amp;root-&gt;right == NULL) {<br>            if (sum==root-&gt;val)<br>                return true;<br>            else<br>                return false;<br>        }<br>        if (root-&gt;left != NULL)<br>            ans = hasPathSum(root-&gt;left, sum - root-&gt;val);<br>        if(ans==true)<br>            return ans;<br>        if (root-&gt;right != NULL)<br>            ans = hasPathSum(root-&gt;right, sum - root-&gt;val);<br>        return ans;<br>}</code></p>
 <h2 id="Binary-Tree-Paths"><a href="#Binary-Tree-Paths" class="headerlink" title="Binary Tree Paths"></a>Binary Tree Paths</h2><p><a href="https://leetcode.com/problems/binary-tree-paths/description/" target="_blank" rel="external">link</a><br>去掉了多余内容，只保留主要代码<br><code><br>string ans = “”;<br>vector<string> s;<br>//前提0-9<br>void help(TreeNode* root) {<br>    ans += root-&gt;val + ‘0’;<br>    if (root-&gt;left == NULL&amp;&amp;root-&gt;right == NULL) {<br>        s.push_back(ans);<br>        ans.erase(ans.end() - 1);<br>        return;<br>    }<br>    if (root-&gt;left != NULL)<br>        help(root-&gt;left);<br>    if (root-&gt;right != NULL)<br>        help(root-&gt;right);<br>    ans.erase(ans.end() - 1);//回溯<br>}</string></code></p>
 
@@ -444,11 +444,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">生活杂感</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color4">并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">生活杂感</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -457,10 +461,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线段树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">并查集</a>
               </li>
             
             <div class="clearfix"></div>
