@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://Persuingsdu.github.io">
-  <title>DFS | Persuing</title>
+  <title>Leetcode | Persuing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="2017/10/20更新于图书馆">
+  <meta name="description" content="2017/10/21做题Maximum Binary Tree  递归建树Populating Next Right Pointers in Each Node II  bfsMaximum Depth of Binary Tree dfsBinary Tree Right Side View  dfs / bfs">
 <meta name="keywords" content="数据结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DFS">
+<meta property="og:title" content="Leetcode">
 <meta property="og:url" content="http://Persuingsdu.github.io/2017/10/15/DFS/index.html">
 <meta property="og:site_name" content="Persuing">
-<meta property="og:description" content="2017/10/20更新于图书馆">
-<meta property="og:updated_time" content="2017-10-20T15:02:33.245Z">
+<meta property="og:description" content="2017/10/21做题Maximum Binary Tree  递归建树Populating Next Right Pointers in Each Node II  bfsMaximum Depth of Binary Tree dfsBinary Tree Right Side View  dfs / bfs">
+<meta property="og:updated_time" content="2017-10-21T08:02:10.226Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DFS">
-<meta name="twitter:description" content="2017/10/20更新于图书馆">
+<meta name="twitter:title" content="Leetcode">
+<meta name="twitter:description" content="2017/10/21做题Maximum Binary Tree  递归建树Populating Next Right Pointers in Each Node II  bfsMaximum Depth of Binary Tree dfsBinary Tree Right Side View  dfs / bfs">
   
   
     <link rel="icon" href="/favicon.png">
@@ -148,7 +148,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      DFS
+      Leetcode
     </h1>
   
 
@@ -172,7 +172,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong><em>2017/10/20更新于图书馆</em></strong><br><a id="more"></a><br>做了几道题目之后，感觉也不是很难，Leetcode上关于树的递归程序大致可以编写为:<br><code><br>void dfs(TreeNode* root){<br>    …<br>    if(root-&gt;left){<br>        …<br>        dfs(root-&gt;left);<br>        …<br>    }<br>    if(root-&gt;right){<br>        …<br>        dfs(root-&gt;right);<br>        …<br>    }<br>    …<br>}</code><br>大致结构如上，然后选择较小的数据，跟着程序走一遍，修正条件，即可。</p>
+        <p><strong><em>2017/10/21做题</em></strong><br><a href="https://leetcode.com/problems/maximum-binary-tree/description/" target="_blank" rel="external">Maximum Binary Tree </a> 递归建树<br><a href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/description/" target="_blank" rel="external">Populating Next Right Pointers in Each Node II </a> bfs<br><a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/description/" target="_blank" rel="external">Maximum Depth of Binary Tree</a> dfs<br><a href="https://leetcode.com/problems/binary-tree-right-side-view/description/" target="_blank" rel="external">Binary Tree Right Side View </a> dfs / bfs<br><a id="more"></a><br><strong><em>2017/10/20更新于图书馆</em></strong><br>做了几道题目之后，感觉也不是很难，Leetcode上关于树的递归程序大致可以编写为:<br><code><br>void dfs(TreeNode* root){<br>    …<br>    if(root-&gt;left){<br>        …<br>        dfs(root-&gt;left);<br>        …<br>    }<br>    if(root-&gt;right){<br>        …<br>        dfs(root-&gt;right);<br>        …<br>    }<br>    …<br>}</code><br>大致结构如上，然后选择较小的数据，跟着程序走一遍，修正条件，即可。</p>
 <p><strong><em>下面是关于树的bfs与dfs</em></strong></p>
 <h2 id="dfs-输出每条路径"><a href="#dfs-输出每条路径" class="headerlink" title="dfs 输出每条路径"></a>dfs 输出每条路径</h2><p>如下面的题目所述，不再赘述。</p>
 <h2 id="bfs-分行输出每行row中所有节点的值"><a href="#bfs-分行输出每行row中所有节点的值" class="headerlink" title="bfs 分行输出每行row中所有节点的值"></a>bfs 分行输出每行row中所有节点的值</h2><p>代码如下<br><code><br>vector<vector<int>&gt; zigzagLevelOrder(TreeNode<em> root) {<br>    vector<vector<int>&gt; ans;<br>    queue&lt;TreeNode</vector<int></em>&gt; unvisted;<br>    if (root == NULL) return ans;<br>    int count = 1; int child = 0;<br>    unvisted.push(root);<br>    while (!unvisted.empty()) {<br>        vector<int> element;<br>        while (count–) {<br>            TreeNode* current = unvisted.front();<br>            unvisted.pop();<br>            element.push_back(current-&gt;val);<br>            if (current-&gt;left) {<br>                unvisted.push(current-&gt;left);<br>                child++;<br>            }<br>            if (current-&gt;right) {<br>                unvisted.push(current-&gt;right);<br>                child++;<br>            }<br>        }<br>        ans.push_back(element);<br>        count = child;<br>        child = 0;<br>    }<br>    return ans;<br>}</int></vector<int></code></p>
@@ -445,15 +445,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">并查集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">生活杂感</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">伪文艺</a>
+                <a href="javascript:void(0)" class="js-tag color4">并查集</a>
               </li>
              
               <li class="article-tag-list-item">
