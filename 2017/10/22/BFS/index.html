@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://Persuingsdu.github.io">
   <title>BST | Persuing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="2017/10/26更新">
+  <meta name="description" content="2017/10/28更新">
 <meta name="keywords" content="数据结构,bst">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BST">
 <meta property="og:url" content="http://Persuingsdu.github.io/2017/10/22/BFS/index.html">
 <meta property="og:site_name" content="Persuing">
-<meta property="og:description" content="2017/10/26更新">
+<meta property="og:description" content="2017/10/28更新">
 <meta property="og:image" content="http://persuingsdu.github.io/img/sum.png">
-<meta property="og:updated_time" content="2017-10-26T11:16:45.560Z">
+<meta property="og:updated_time" content="2017-10-28T11:50:56.944Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BST">
-<meta name="twitter:description" content="2017/10/26更新">
+<meta name="twitter:description" content="2017/10/28更新">
 <meta name="twitter:image" content="http://persuingsdu.github.io/img/sum.png">
   
   
@@ -174,9 +174,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong><em>2017/10/26更新</em></strong></p>
+        <p><strong><em>2017/10/28更新</em></strong></p>
 <a id="more"></a>
-<p><a href="https://leetcode.com/problems/two-sum-iv-input-is-a-bst/description/" target="_blank" rel="external">Two Sum IV - Input is a BST </a><br><a href="https://leetcode.com/problems/most-frequent-subtree-sum/description/" target="_blank" rel="external">Most Frequent Subtree Sum</a></p>
+<p><a href="https://leetcode.com/problems/kth-largest-element-in-an-array/description/" target="_blank" rel="external">Kth Largest Element in an Array</a><br><a href="https://leetcode.com/problems/subsets/description/" target="_blank" rel="external">Subsets</a></p>
+<ul>
+<li><p><strong>Kth Largest Element in an Array</strong><br>quick sort </p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="keyword">int</span> ans;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">quick_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; s, <span class="keyword">int</span> l, <span class="keyword">int</span> r,<span class="keyword">int</span> k)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">	<span class="keyword">if</span> (l &lt; r)</div><div class="line">	&#123;</div><div class="line">		<span class="comment">//Swap(s[l], s[(l + r) / 2]); </span></div><div class="line">		<span class="keyword">int</span> i = l, j = r, x = s[l];</div><div class="line">		<span class="keyword">while</span> (i &lt; j)</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">while</span> (i &lt; j &amp;&amp; s[j] &lt;= x) </div><div class="line">				j--;</div><div class="line">			<span class="keyword">if</span> (i &lt; j)</div><div class="line">				s[i++] = s[j];</div><div class="line"></div><div class="line">			<span class="keyword">while</span> (i &lt; j &amp;&amp; s[i] &gt; x)</div><div class="line">				i++;</div><div class="line">			<span class="keyword">if</span> (i &lt; j)</div><div class="line">				s[j--] = s[i];</div><div class="line">		&#125;</div><div class="line">		s[i] = x;</div><div class="line">		<span class="keyword">if</span> (i &gt; k<span class="number">-1</span> )</div><div class="line">			quick_sort(s, l, i - <span class="number">1</span>, k );</div><div class="line">		<span class="keyword">if</span> (i &lt; k<span class="number">-1</span> ) <span class="comment">// 2,3   3   </span></div><div class="line">			 quick_sort(s, i + <span class="number">1</span>, r, k);</div><div class="line">		<span class="keyword">if</span> (i == k<span class="number">-1</span> )</div><div class="line">			ans = s[i];</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line">	ans = s[l];</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">findKthLargest</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">	quick_sort(nums, <span class="number">0</span>, nums.size() - <span class="number">1</span>, k);</div><div class="line">	<span class="keyword">return</span> ans;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Subsets</strong><br><a href="http://fuliang.iteye.com/blog/164686" target="_blank" rel="external">Backtarcking</a><br>backtracking &amp; bit manipulation &amp; iterative<br><a href="https://leetcode.com/problems/subsets/discuss/" target="_blank" rel="external">Discuss</a></p>
+</li>
+</ul>
+<p><strong><em>2017/10/26更新</em></strong><br><a href="https://leetcode.com/problems/two-sum-iv-input-is-a-bst/description/" target="_blank" rel="external">Two Sum IV - Input is a BST </a><br><a href="https://leetcode.com/problems/most-frequent-subtree-sum/description/" target="_blank" rel="external">Most Frequent Subtree Sum</a></p>
 <ul>
 <li><strong>Two Sum IV - Input is a BST</strong><br>水题，树的中序遍历 &amp; two pointer<figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">travel</span><span class="params">(TreeNode* root,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (!root) <span class="keyword">return</span>;</div><div class="line">	<span class="keyword">if</span> (root-&gt;left)</div><div class="line">		travel(root-&gt;left,nums);</div><div class="line">	nums.push_back(root-&gt;val);</div><div class="line">	<span class="keyword">if</span> (root-&gt;right)</div><div class="line">		travel(root-&gt;right,nums);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">findTarget</span><span class="params">(TreeNode* root, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums;</div><div class="line">	travel(root,nums);</div><div class="line">	<span class="keyword">if</span> (nums[<span class="number">0</span>]+nums[<span class="number">1</span>] &gt; k) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	<span class="keyword">int</span> i = <span class="number">0</span>, j = nums.size() - <span class="number">1</span>;</div><div class="line">	<span class="keyword">while</span> (i &lt; j) &#123;</div><div class="line">		<span class="keyword">if</span> (nums[i] + nums[j] &gt; k)</div><div class="line">			j--;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">if</span> (nums[i] + nums[j] &lt; k)</div><div class="line">				i++;</div><div class="line">			<span class="keyword">else</span></div><div class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;		</div><div class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
@@ -377,14 +385,11 @@
 				
 					<!-- 不蒜统计 -->
 
-<span style="display: inline;" >Single view <span id="busuanzi_value_site_uv" font="宋体" style="color:pink"></span> </span>
-<span style="display: inline;" >All view <span id="busuanzi_value_site_pv" font="宋体" style="color:pink"></span> </span>
-
-
-
+					<span style="display: inline;" >Single view <span id="busuanzi_value_site_uv" font="宋体" style="color:pink"></span> </span>
+					<span style="display: inline;" >All view <span id="busuanzi_value_site_pv" font="宋体" style="color:pink"></span> </span>
       	</div>
-    </div>
-  </div>
+		</div>			
+	</div>
 </footer>
 
     </div>
@@ -456,11 +461,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color5">生活杂感</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">生活杂感</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
