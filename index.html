@@ -131,6 +131,111 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Leetcode-Backtracking" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  
+  
+  
+  
+  
+  
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/29/Leetcode-Backtracking/">Leetcode Backtracking</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/29/Leetcode-Backtracking/" class="archive-article-date">
+  	<time datetime="2017-10-29T03:09:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-29</time>
+</a>
+        
+      </header>
+
+      
+
+
+
+
+
+
+
+
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>用来总结leetcode上的一类问题</strong></p>
+<ul>
+<li><a href="https://leetcode.com/problems/combinations/description/" target="_blank" rel="external">Combinations</a><br>求幂集问题演化版<br>My solution:<figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="keyword">int</span> s = <span class="number">0</span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; ele, <span class="keyword">int</span> n, <span class="keyword">int</span> k, <span class="keyword">int</span> i,<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; flag)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (s == k) &#123;</div><div class="line">		<span class="keyword">int</span> c = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</div><div class="line">			<span class="keyword">if</span> (flag[i] == <span class="number">1</span>) &#123;</div><div class="line">				ele.push_back(i);</div><div class="line">				c++;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span> (c == k)</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ele.size(); i++)</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; ele[i];</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		res.push_back(ele);</div><div class="line">		ele.clear();</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (i &gt; n)</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	flag[i] = <span class="number">1</span>;</div><div class="line">	s++;</div><div class="line">	dfs(ele, n, k, i + <span class="number">1</span>,res,flag);</div><div class="line">	flag[i] = <span class="number">0</span>;</div><div class="line">	s--;</div><div class="line">	dfs(ele, n, k, i + <span class="number">1</span>,res,flag);</div><div class="line">&#125;</div><div class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; combine(<span class="keyword">int</span> n, <span class="keyword">int</span> k) &#123;</div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; flag(n + <span class="number">1</span>, <span class="number">0</span>);</div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ele;</div><div class="line">	<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</div><div class="line">	dfs(ele, n, k, <span class="number">1</span>, res, flag );</div><div class="line">	<span class="keyword">return</span> res;</div><div class="line">&#125;</div></pre></td></tr></table></figure></li>
+</ul>
+
+      
+
+      
+    </div>
+
+
+    
+
+
+
+
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/29/Leetcode-Backtracking/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-BFS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   
   
@@ -867,10 +972,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">生活杂感</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -879,15 +980,23 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">生活杂感</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ACM</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线段树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">并查集</a>
               </li>
             
             <div class="clearfix"></div>
