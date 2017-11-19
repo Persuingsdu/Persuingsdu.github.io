@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://Persuingsdu.github.io">
-  <title>Archives | Persuing</title>
+  <title>双向链表 | Persuing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Persuing">
-<meta property="og:url" content="http://Persuingsdu.github.io/archives/index.html">
+  <meta name="description" content="学习了一下双向链表的实现。">
+<meta name="keywords" content="数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="双向链表">
+<meta property="og:url" content="http://Persuingsdu.github.io/2017/11/19/双向链表/index.html">
 <meta property="og:site_name" content="Persuing">
+<meta property="og:description" content="学习了一下双向链表的实现。">
+<meta property="og:updated_time" content="2017-11-19T12:19:18.190Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Persuing">
+<meta name="twitter:title" content="双向链表">
+<meta name="twitter:description" content="学习了一下双向链表的实现。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -129,36 +134,138 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-双向链表" class="article article-type-post " itemscope itemprop="blogPost">
   
   
+  
+  
+  
+  
+  
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/19/双向链表/" class="archive-article-date">
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      双向链表
+    </h1>
+  
+
+        
+        <a href="/2017/11/19/双向链表/" class="archive-article-date">
   	<time datetime="2017-11-19T11:45:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-19</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/19/双向链表/">双向链表</a>
-    </h1>
-  
+        
+      </header>
 
-        <div class="article-info info-on-right">
+      
+
+
+
+
+
+
+
+
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong><em>学习了一下双向链表的实现。</em></strong><br><a id="more"></a><br><a href="https://www.cnblogs.com/skywang12345/p/3561803.html#a32" target="_blank" rel="external">Refernce</a><br>数据结构的实验要求掌握链表遍历器的使用，由于书上的链表是单向链表，则迭代器也只能是向前的迭代器。<br>为了实现双向迭代器，采用了双向链表这一数据结构。<br><strong>结构体的定义</strong><br>Data部分以及向前和向后的指针<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></div><div class="line"><span class="class"><span class="title">struct</span> <span class="title">chainode</span> &#123;</span></div><div class="line">	T element;</div><div class="line">	chainode&lt;T&gt;* pre;</div><div class="line">	chainode&lt;T&gt;* next;</div><div class="line">	chainode() &#123;&#125;</div><div class="line">	chainode(T&amp; element) &#123;</div><div class="line">		<span class="keyword">this</span>-&gt;element = element;</div><div class="line">	&#125;</div><div class="line">	chainode(T&amp; element, chainode&lt;T&gt;* pre, chainode&lt;T&gt;* next) &#123;</div><div class="line">		<span class="keyword">this</span>-&gt;element = element;</div><div class="line">		<span class="keyword">this</span>-&gt;pre = pre;</div><div class="line">		<span class="keyword">this</span>-&gt;next = next;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p><strong>双向链表类的实现</strong><br>重点是内部类迭代器类的实现。<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="comment">//所有位置的下标是以 0 计数</span></div><div class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></div><div class="line"><span class="class"><span class="title">class</span> <span class="title">doubleLink</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	doubleLink();</div><div class="line">	~doubleLink();</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> listSize; &#125;</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> listSize == <span class="number">0</span>; &#125;</div><div class="line">	chainode&lt;T&gt;* get_node(<span class="keyword">int</span> index);<span class="comment">//获得index位置上的节点</span></div><div class="line">	<span class="function">T <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span></span>;<span class="comment">//获得指定位置上的元素</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> index, T elemet)</span></span>;<span class="comment">//将元素插入到特定的位置</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">erase</span><span class="params">(<span class="keyword">int</span> index)</span></span>;<span class="comment">//删除指定位置上的元素</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">insert_first</span><span class="params">(T element)</span></span>;<span class="comment">//将元素插入到第一个位置</span></div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(T value)</span></span>;<span class="comment">//获取元素的位置,如果不存在就返回 0</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">(ostream&amp; out)</span> <span class="keyword">const</span></span>;<span class="comment">//输出链表的元素</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">erase_e</span><span class="params">(T key)</span></span>;<span class="comment">//删除指定的元素,如果该元素不存在,则什么也不操作,输出提示语句,返回</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">rcout</span><span class="params">(doubleLink&lt;T&gt;&amp; theChain)</span></span>;</div><div class="line">	<span class="class"><span class="keyword">class</span> <span class="title">iterator</span>;</span></div><div class="line">	<span class="function">iterator <span class="title">begin</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> iterator(firstNode-&gt;next); &#125;<span class="comment">//第一个元素</span></div><div class="line">	<span class="function">iterator <span class="title">end</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> iterator(firstNode); &#125;<span class="comment">//空的头结点</span></div><div class="line">	<span class="comment">//双向链表的迭代器</span></div><div class="line">	<span class="class"><span class="keyword">class</span> <span class="title">iterator</span></span></div><div class="line"><span class="class">	&#123;</span></div><div class="line">	<span class="keyword">public</span>:</div><div class="line">		<span class="comment">// typedefs required by C++ for a forward iterator</span></div><div class="line">		<span class="keyword">typedef</span> forward_iterator_tag iterator_category;</div><div class="line">		<span class="keyword">typedef</span> T value_type;</div><div class="line">		<span class="keyword">typedef</span> <span class="keyword">ptrdiff_t</span> difference_type;</div><div class="line">		<span class="keyword">typedef</span> T* pointer;</div><div class="line">		<span class="keyword">typedef</span> T&amp; reference;</div><div class="line">		<span class="comment">//构造函数</span></div><div class="line">		iterator(chainode&lt;T&gt;* theNode = <span class="literal">NULL</span>)</div><div class="line">		&#123;</div><div class="line">			node = theNode;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// 解引用</span></div><div class="line">		T&amp; <span class="keyword">operator</span>*() <span class="keyword">const</span> &#123; <span class="keyword">return</span> node-&gt;element; &#125;</div><div class="line">		T* <span class="keyword">operator</span>-&gt;() <span class="keyword">const</span> &#123; <span class="keyword">return</span> &amp;node-&gt;element; &#125;</div><div class="line">		<span class="comment">// 增加</span></div><div class="line">		iterator&amp; <span class="keyword">operator</span>++() &#123; <span class="comment">//前加</span></div><div class="line">			node = node-&gt;next; </div><div class="line">			<span class="keyword">return</span> *<span class="keyword">this</span>;</div><div class="line">		&#125;</div><div class="line">		iterator <span class="keyword">operator</span>++(<span class="keyword">int</span>) &#123;<span class="comment">//后加</span></div><div class="line">			iterator old = *<span class="keyword">this</span>;</div><div class="line">			node = node-&gt;next;</div><div class="line">			<span class="keyword">return</span> old;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//递减</span></div><div class="line">		iterator&amp; <span class="keyword">operator</span>--() &#123;<span class="comment">//前减</span></div><div class="line">			node = node-&gt;pre;</div><div class="line">			<span class="keyword">return</span> *<span class="keyword">this</span>;</div><div class="line">		&#125;</div><div class="line">		iterator <span class="keyword">operator</span>--(<span class="keyword">int</span>) &#123;<span class="comment">//后减</span></div><div class="line">			iterator old = *<span class="keyword">this</span>;</div><div class="line">			node = node-&gt;pre;</div><div class="line">			<span class="keyword">return</span> old;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//判断</span></div><div class="line">		<span class="keyword">bool</span> <span class="keyword">operator</span>!=(<span class="keyword">const</span> iterator right) <span class="keyword">const</span>&#123;</div><div class="line">			<span class="keyword">return</span> node != right.node;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> iterator right) <span class="keyword">const</span>&#123;</div><div class="line">			<span class="keyword">return</span> node == right.node;</div><div class="line">		&#125;</div><div class="line">	<span class="keyword">protected</span>:</div><div class="line">		chainode&lt;T&gt;* node;</div><div class="line">	&#125;;  </div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">int</span> listSize;</div><div class="line">	chainode&lt;T&gt;* firstNode;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p><strong>*具体的方法实现</strong></p>
+<ul>
+<li><p>构造函数<br>在这里初始化一个空的表头，在链表中头结点Data部分为空，初始化pre与next均为自身。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="comment">//表头不存储任何元素</span></div><div class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></div><div class="line"><span class="class"><span class="title">doubleLink</span>&lt;T&gt;:</span>:doubleLink() &#123;</div><div class="line">	listSize = <span class="number">0</span>;</div><div class="line">	firstNode = <span class="keyword">new</span> chainode&lt;T&gt;();<span class="comment">//空表头</span></div><div class="line">	firstNode-&gt;pre = firstNode-&gt;next = firstNode;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>析构函数<br>这里的删除每个节点与单向链表类似，注意遍历的方式，由于我们增加了一个空的表头，因此遍历的方式同循环链表<br>最后，要删除空的表头。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="comment">//析构函数</span></div><div class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></div><div class="line"><span class="class"><span class="title">doubleLink</span>&lt;T&gt;:</span>:~doubleLink() &#123;</div><div class="line">	chainode&lt;T&gt;* p;</div><div class="line">	chainode&lt;T&gt;* q = firstNode-&gt;next;</div><div class="line">	<span class="keyword">while</span> (q != firstNode) &#123;</div><div class="line">		p = q;</div><div class="line">		q = q-&gt;next;</div><div class="line">		<span class="keyword">delete</span> p;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//删除表头</span></div><div class="line">	<span class="keyword">delete</span> firstNode;<span class="comment">//存在的对象</span></div><div class="line">	firstNode = <span class="literal">NULL</span>;<span class="comment">//节点指向的对象重置为NULL</span></div><div class="line">	listSize = <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>获取指定位置上的节点<br>对于单向链表，只能从头遍历，但是由于双向链表能找到其前驱，于是有两种方式，从头开始找或者从尾节点开始找，根据index来确定采取何种方式，从而更快。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="comment">//获得位置为index的节点</span></div><div class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></div><div class="line"><span class="class"><span class="title">chainode</span>&lt;T&gt;* <span class="title">doubleLink</span>&lt;T&gt;:</span>:get_node(<span class="keyword">int</span> index) &#123;</div><div class="line">	<span class="keyword">if</span> (index&lt;<span class="number">0</span> || index&gt;=listSize) &#123;</div><div class="line">		<span class="keyword">throw</span> invalid_argument(<span class="string">"invalid_argument"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//正向查找</span></div><div class="line">	<span class="keyword">if</span> (index &lt;= listSize / <span class="number">2</span>) &#123;</div><div class="line">		chainode&lt;T&gt;* pos = firstNode-&gt;next;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; index; i++)</div><div class="line">			pos = pos-&gt;next;</div><div class="line">		<span class="keyword">return</span> pos;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">int</span> reverIndex = listSize - index - <span class="number">1</span>;</div><div class="line">		chainode&lt;T&gt;* rpos = firstNode-&gt;pre;<span class="comment">//尾节点</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; reverIndex; j++)</div><div class="line">			rpos = rpos-&gt;pre;</div><div class="line">		<span class="keyword">return</span> rpos;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>插入元素与删除元素<br>这也是与单向链表的显著不同的地方。</p>
+</li>
+<li><p>插入元素</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="comment">//在指定位置上插入元素</span></div><div class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></div><div class="line"><span class="class"><span class="title">void</span> <span class="title">doubleLink</span>&lt;T&gt;:</span>:insert(<span class="keyword">int</span> index, T element) &#123;</div><div class="line">	<span class="keyword">if</span> (index == <span class="number">0</span>) &#123;</div><div class="line">		insert_first(element);</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line">	chainode&lt;T&gt;* pos = get_node(index);</div><div class="line">	chainode&lt;T&gt;* newNode = <span class="keyword">new</span> chainode&lt;T&gt;(element, pos-&gt;pre, pos);</div><div class="line">	pos-&gt;pre-&gt;next = newNode;</div><div class="line">	pos-&gt;pre = newNode;</div><div class="line">	listSize++;</div><div class="line">	<span class="keyword">return</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除元素</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="comment">//删除指定位置上的元素</span></div><div class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></div><div class="line"><span class="class"><span class="title">void</span> <span class="title">doubleLink</span>&lt;T&gt;:</span>:erase(<span class="keyword">int</span> index) &#123;</div><div class="line">	chainode&lt;T&gt;* pos = get_node(index);</div><div class="line">	pos-&gt;next-&gt;pre = pos-&gt;pre;</div><div class="line">	pos-&gt;pre-&gt;next = pos-&gt;next;</div><div class="line">	<span class="keyword">delete</span> pos;</div><div class="line">	listSize--;</div><div class="line">	<span class="keyword">return</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>链表的反向遍历</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="comment">//反向输出链表的元素</span></div><div class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></div><div class="line"><span class="class"><span class="title">void</span> <span class="title">doubleLink</span>&lt;T&gt;:</span>:rcout(doubleLink&lt;T&gt;&amp; theChain) &#123;</div><div class="line">	<span class="keyword">auto</span> iter = --theChain.end();</div><div class="line">	<span class="keyword">while</span> (iter != --theChain.begin()) &#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; *iter &lt;&lt; <span class="string">" "</span>;</div><div class="line">		iter--;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong><em>以下是其它零碎的方法</em></strong></p>
+<ul>
+<li><p>获得指定位置上的元素</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></div><div class="line"><span class="class"><span class="title">T</span> <span class="title">doubleLink</span>&lt;T&gt;:</span>:get(<span class="keyword">int</span> index) &#123;</div><div class="line">	chainode&lt;T&gt;* p = get_node(index);</div><div class="line">	<span class="keyword">return</span> p-&gt;element;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在首位置插入元素</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></div><div class="line"><span class="class"><span class="title">void</span> <span class="title">doubleLink</span>&lt;T&gt;:</span>:insert_first(T element) &#123;</div><div class="line">	chainode&lt;T&gt;* newNode = <span class="keyword">new</span> chainode&lt;T&gt;(element, firstNode, firstNode-&gt;next);</div><div class="line">	firstNode-&gt;next-&gt;pre = newNode;</div><div class="line">	firstNode-&gt;next = newNode;</div><div class="line">	listSize++;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>获得指定位置上的元素</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></div><div class="line"><span class="class"><span class="title">int</span> <span class="title">doubleLink</span>&lt;T&gt;:</span>:indexOf(T value) &#123;</div><div class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">	chainode&lt;T&gt;* pos = firstNode-&gt;next;</div><div class="line">	<span class="keyword">while</span> (pos != firstNode) &#123;</div><div class="line">		<span class="keyword">if</span> (pos-&gt;element == value)</div><div class="line">			<span class="keyword">return</span> i;</div><div class="line">		pos = pos-&gt;next;</div><div class="line">		i++;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>遍历输出链表中的元素</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></div><div class="line"><span class="class"><span class="title">void</span> <span class="title">doubleLink</span>&lt;T&gt;:</span>:output(ostream&amp; out) <span class="keyword">const</span> &#123;</div><div class="line">	chainode&lt;T&gt;* p = firstNode-&gt;next;</div><div class="line">	<span class="keyword">while</span> (p != firstNode) &#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; p-&gt;element &lt;&lt; <span class="string">" "</span>;</div><div class="line">		p = p-&gt;next;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除指定内容的元素</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></div><div class="line"><span class="class"><span class="title">void</span> <span class="title">doubleLink</span>&lt;T&gt;:</span>:erase_e(T key) &#123;</div><div class="line">	chainode&lt;T&gt;* pos = firstNode-&gt;next;</div><div class="line">	<span class="keyword">while</span> (pos != firstNode) &#123;</div><div class="line">		<span class="keyword">if</span> (pos-&gt;element == key) &#123;</div><div class="line">			pos-&gt;next-&gt;pre = pos-&gt;pre;</div><div class="line">			pos-&gt;pre-&gt;next = pos-&gt;next;</div><div class="line">			listSize--;</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		&#125;</div><div class="line">		pos = pos-&gt;next;</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"NO SUCH ELEMENT"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">return</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+
+            
+
+
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>Thank u !<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.png">
+                      <span class="reward-type">微信</span>
+                      
+                      <span id="busuanzi_container_page_pv" font="宋体" style="color:pink; display:inline">
+                        View  <span id="busuanzi_value_page_pv" font="宋体" style="color:pink"></span>
+                     </span>
           
+                  
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+
+
+    
+
+
+
+
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -170,301 +277,109 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://Persuingsdu.github.io/2017/11/19/双向链表/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/29/Leetcode-Backtracking/" class="archive-article-date">
-  	<time datetime="2017-10-29T03:09:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-29</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/29/Leetcode-Backtracking/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Leetcode Backtracking</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/29/Leetcode-Backtracking/">Leetcode Backtracking</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/22/BFS/" class="archive-article-date">
-  	<time datetime="2017-10-22T07:23:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/22/BFS/">BST</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bst</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/15/DFS/" class="archive-article-date">
-  	<time datetime="2017-10-15T15:58:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/15/DFS/">Leetcode</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/06/并查集/" class="archive-article-date">
-  	<time datetime="2017-10-06T11:41:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/06/并查集/">并查集</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">并查集</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/05/线段树基本操作-一/" class="archive-article-date">
-  	<time datetime="2017-10-05T14:44:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/05/线段树基本操作-一/">线段树基本操作(一)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ACM</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线段树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/05/关于郑州的记忆/" class="archive-article-date">
-  	<time datetime="2017-10-05T07:33:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/05/关于郑州的记忆/">关于郑州的记忆</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">生活杂感</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/04/My-first-blog/" class="archive-article-date">
-  	<time datetime="2017-10-04T14:00:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/04/My-first-blog/">My first blog</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">生活杂感</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -496,8 +411,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
