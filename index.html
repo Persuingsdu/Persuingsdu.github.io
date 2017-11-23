@@ -169,7 +169,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>程序用堆来储存动态分配的对象，即那些在程序运行时分配的对象。动态对象的生存期由程序来控制，当动态对象不再使用时，我们的代码必须显示地销毁它们。<br><strong>动态内存与智能指针</strong><br>动态内存的管理通过一对操作运算符来完成。<br>new，在动态内存中为对象分配空间，并返回一个指向该对象的指针；<br>delete，接受一个动态对象的指针，销毁该对象，并释放与之相关的内存。<br>1.忘记释放内存，产生内存泄露；<br>2.尚有指针引用内存的情况下释放了它，产生引用非法内存的指针。</p>
+        <a id="more"></a>
+<p>程序用堆来储存动态分配的对象，即那些在程序运行时分配的对象。动态对象的生存期由程序来控制，当动态对象不再使用时，我们的代码必须显示地销毁它们。<br><strong>动态内存与智能指针</strong><br>动态内存的管理通过一对操作运算符来完成。<br>new，在动态内存中为对象分配空间，并返回一个指向该对象的指针；<br>delete，接受一个动态对象的指针，销毁该对象，并释放与之相关的内存。<br>1.忘记释放内存，产生内存泄露；<br>2.尚有指针引用内存的情况下释放了它，产生引用非法内存的指针。</p>
 <p>两种智能指针，负责自动释放所指向的对象,定义在memory头文件中。<br>shared_ptr 允许多个指针指向同一个对象；<br>unique_ptr 独占指向的对象；</p>
 <p><strong>创建智能指针</strong><br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="built_in">shared_ptr</span>&lt;<span class="built_in">string</span>&gt; p1;<span class="comment">//shared_ptr，可以指向string</span></div><div class="line"><span class="built_in">shared_ptr</span>&lt;<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt;&gt; p2;</div><div class="line"><span class="comment">//使用大致与普通指针类似</span></div><div class="line"><span class="keyword">if</span>(p1 &amp;&amp; p1-&gt;empty())</div><div class="line">   *p1=<span class="string">"hi"</span>;</div></pre></td></tr></table></figure></p>
 <p><strong>make_shared函数</strong><br>最安全的分配和使用动态内存的方法是调用一个名为make_shared的标准库函数，定义在memory头文件中。<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p3 = make_shared&lt;<span class="keyword">int</span>&gt;(<span class="number">42</span>);</div><div class="line"><span class="built_in">shared_ptr</span>&lt;<span class="built_in">string</span>&gt; p4 = make_shared&lt;<span class="built_in">string</span>&gt;(<span class="number">10</span>,<span class="string">'9'</span>);</div><div class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p5 = make_shared&lt;<span class="keyword">int</span>&gt;();<span class="comment">//指向一个值初始化的int,值为0</span></div></pre></td></tr></table></figure></p>
@@ -1193,7 +1194,7 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">生活杂感</a>
+                <a href="javascript:void(0)" class="js-tag color4">bst</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1201,11 +1202,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">c++primer</a>
+                <a href="javascript:void(0)" class="js-tag color5">生活杂感</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bst</a>
+                <a href="javascript:void(0)" class="js-tag color5">c++primer</a>
               </li>
              
               <li class="article-tag-list-item">
