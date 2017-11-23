@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://Persuingsdu.github.io">
-  <title>线段树基本操作(一) | Persuing</title>
+  <title>动态内存与智能指针 | Persuing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="国庆作业的需要，今晚学习了一下线段树的基本操作——建树,区间查询,单点更新后续学习区间更新及更多的知识,此处只放代码。主要参考此文章 数据结构——线段树">
-<meta name="keywords" content="数据结构,ACM,线段树">
+  <meta name="description" content="程序用堆来储存动态分配的对象，即那些在程序运行时分配的对象。动态对象的生存期由程序来控制，当动态对象不再使用时，我们的代码必须显示地销毁它们。动态内存与智能指针动态内存的管理通过一对操作运算符来完成。new，在动态内存中为对象分配空间，并返回一个指向该对象的指针；delete，接受一个动态对象的指针，销毁该对象，并释放与之相关的内存。1.忘记释放内存，产生内存泄露；2.尚有指针引用内存的情况下释放">
+<meta name="keywords" content="c++primer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线段树基本操作(一)">
-<meta property="og:url" content="http://Persuingsdu.github.io/2017/10/05/线段树基本操作-一/index.html">
+<meta property="og:title" content="动态内存与智能指针">
+<meta property="og:url" content="http://Persuingsdu.github.io/2017/11/23/动态内存与智能指针/index.html">
 <meta property="og:site_name" content="Persuing">
-<meta property="og:description" content="国庆作业的需要，今晚学习了一下线段树的基本操作——建树,区间查询,单点更新后续学习区间更新及更多的知识,此处只放代码。主要参考此文章 数据结构——线段树">
-<meta property="og:updated_time" content="2017-10-31T12:06:02.288Z">
+<meta property="og:description" content="程序用堆来储存动态分配的对象，即那些在程序运行时分配的对象。动态对象的生存期由程序来控制，当动态对象不再使用时，我们的代码必须显示地销毁它们。动态内存与智能指针动态内存的管理通过一对操作运算符来完成。new，在动态内存中为对象分配空间，并返回一个指向该对象的指针；delete，接受一个动态对象的指针，销毁该对象，并释放与之相关的内存。1.忘记释放内存，产生内存泄露；2.尚有指针引用内存的情况下释放">
+<meta property="og:updated_time" content="2017-11-23T08:44:57.854Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="线段树基本操作(一)">
-<meta name="twitter:description" content="国庆作业的需要，今晚学习了一下线段树的基本操作——建树,区间查询,单点更新后续学习区间更新及更多的知识,此处只放代码。主要参考此文章 数据结构——线段树">
+<meta name="twitter:title" content="动态内存与智能指针">
+<meta name="twitter:description" content="程序用堆来储存动态分配的对象，即那些在程序运行时分配的对象。动态对象的生存期由程序来控制，当动态对象不再使用时，我们的代码必须显示地销毁它们。动态内存与智能指针动态内存的管理通过一对操作运算符来完成。new，在动态内存中为对象分配空间，并返回一个指向该对象的指针；delete，接受一个动态对象的指针，销毁该对象，并释放与之相关的内存。1.忘记释放内存，产生内存泄露；2.尚有指针引用内存的情况下释放">
   
   
     <link rel="icon" href="/favicon.png">
@@ -134,7 +134,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-线段树基本操作-一" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-动态内存与智能指针" class="article article-type-post " itemscope itemprop="blogPost">
   
   
   
@@ -148,13 +148,13 @@
         
   
     <h1 class="article-title" itemprop="name">
-      线段树基本操作(一)
+      动态内存与智能指针
     </h1>
   
 
         
-        <a href="/2017/10/05/线段树基本操作-一/" class="archive-article-date">
-  	<time datetime="2017-10-05T14:44:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-05</time>
+        <a href="/2017/11/23/动态内存与智能指针/" class="archive-article-date">
+  	<time datetime="2017-11-23T06:51:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-23</time>
 </a>
         
       </header>
@@ -172,12 +172,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>国庆作业的需要，今晚学习了一下线段树的基本操作——建树,区间查询,单点更新<br>后续学习区间更新及更多的知识,此处只放代码。<br>主要参考此文章 <a href="http://blog.csdn.net/metalseed/article/details/8039326" target="_blank" rel="external">数据结构——线段树</a><br><a id="more"></a></p>
-<h2 id="1-建树"><a href="#1-建树" class="headerlink" title="1.建树"></a>1.建树</h2><p>首先写一个函数,该函数用来更新父节点,指明父节点与左子树与右子树的关系<br><code><br>void pushup(int i) {<br>    segTree[i] = max(segTree[2 <em> i],segTree[2 </em> i + 1]);<br>}</code><br>这里面的关系是可以自定义,可以进行求和,求最小值等等操作,这里选择了最大值作为示例<br><code><br>//利用递归建树<br>void build(int i, int l, int r) {<br>    if (l == r)<br>        segTree[i] = value[l];<br>    else {<br>        //递归构造左右子树<br>        build(2 <em> i, l, (l + r) / 2);<br>        build(2 </em> i + 1, (l + r) / 2 + 1, r);<br>        pushup(i);//回溯更新父节点<br>    }<br>}</code></p>
-<h2 id="2-区间查询"><a href="#2-区间查询" class="headerlink" title="2.区间查询"></a>2.区间查询</h2><p>i代表查询的结点,(b,e)代表该结点的范围,(l,r)代表查询结点的范围<br>注意该函数的return值要与pushup更新父节点的目的匹配,此处就是返回该区间的最大值<br><code><br>int query(int i, int b, int e, int l, int r) {<br>    int p1, p2;<br>    if (l &gt; e||r &lt; b) return INT_MIN; //无交集<br>    if (b &gt;= l&amp;&amp;e &lt;= r) return segTree[i]; //需要查询的区间大于i存储的区间<br>    p1 = query(2 <em> i, b, (b + e) / 2, l, r);<br>    p2 = query(2 </em> i + 1, (b + e) / 2 + 1, e, l, r);<br>    return max(p1, p2);<br>}</code></p>
-<h2 id="3-单节点更新"><a href="#3-单节点更新" class="headerlink" title="3.单节点更新"></a>3.单节点更新</h2><p>i代表结点,(b,e)代表该节点的范围,p代表我们要更新的结点位置,v代表要递增的数值<br><code><br>void update_single(int i, int b, int e, int p, int v) {<br>    if (b == e) { segTree[i] += v; return; }<br>    int m = (b + e) / 2;<br>    if (p &lt;= m) update_single(2 <em> i, b, m, p, v);<br>    else update_single(2 </em> i + 1, m + 1, e, p, v);<br>    pushup(i);//回溯更新<br>}</code><br>特别注意,在实际用中,空间要开4*N </p>
-<h2 id="调试代码"><a href="#调试代码" class="headerlink" title="调试代码"></a>调试代码</h2><p><code><br>const int maxn = 256;<br>int segTree[4 <em> maxn + 10];<br>int value[maxn];<br>int main() {<br>    //开的空间为4</em>N<br>    value[0] = 1; value[1] = 2; value[2] = 2;<br>    value[3] = 4; value[4] = 9; value[5] = 3;<br>    build(1, 0, 5);<br>    for (int i = 1; i &lt;= 20; i++)<br>        cout &lt;&lt; “seg “ &lt;&lt; i &lt;&lt; “=” &lt;&lt; segTree[i] &lt;&lt; endl;<br>    //我们定义pushup得到的最终结果便是segTree[1]<br>    update_single(1, 0, 5, 3, 8);<br>    query(1, 0, 5, 2, 4);<br>}</code></p>
-<p><strong><em>2017/10/9 于图书馆更新</em></strong><br><a href="http://blog.csdn.net/ww140142/article/details/46366241" target="_blank" rel="external">例题 Potted Flower</a><br><code><br>const int maxn = 100010;<br>struct node {<br>    int sum, maxNow, minNow;<br>    int lmax, lmin;<br>    int rmax, rmin;<br>    int left, right;<br>} T[4 <em> maxn];<br>int value[maxn];<br>int n, m;//点数，修改次数<br>void pushup(int i) {<br>    T[i].sum = T[2 </em> i].sum + T[2 <em> i + 1].sum;<br>    T[i].lmax = max(T[2 </em> i].lmax, T[2 <em> i].sum + T[2 </em> i + 1].lmax);<br>    T[i].lmin = min(T[2 <em> i].lmin, T[2 </em> i].sum + T[2 <em> i + 1].lmin);<br>    T[i].rmax = max(T[2 </em> i + 1].rmax, T[2 <em> i + 1].sum + T[2 </em> i].rmax);<br>    T[i].rmin = min(T[2 <em> i + 1].rmin, T[2 </em> i + 1].sum + T[2 <em> i].rmin);<br>    T[i].maxNow = max(max(T[2 </em> i].maxNow, T[2 <em> i + 1].maxNow), T[2 </em> i].rmax + T[2 <em> i + 1].lmax);<br>    T[i].minNow = min(min(T[2 </em> i].minNow, T[2 <em> i + 1].minNow), T[2 </em> i].rmin + T[2 <em> i + 1].lmin);<br>}<br>void build(int i, int l, int r) {<br>    T[i].left = l;<br>    T[i].right = r;<br>    if (l == r) {//叶子结点，将所有数据初始化为data[end],也就是线段树的元线段<br>        T[i].sum = T[i].lmax = T[i].lmin = T[i].rmax =<br>            T[i].rmin = T[i].maxNow = T[i].minNow = value[l];<br>    }<br>    else {//左右递归进行建树<br>        int mid = (l + r) &gt;&gt; 1;<br>        build(2 </em> i, l, mid);<br>        build(2 <em> i + 1, mid+1, r);<br>        pushup(i);<br>    }<br>}<br>//i代表线段树中的节点,k代表要更新的数字的position,v代表value<br>void update_single(int i,int k,int v) {<br>    if (T[i].left == T[i].right) {//更新叶子结点<br>        T[i].sum = T[i].lmax = T[i].lmin = T[i].rmax =<br>            T[i].rmin = T[i].maxNow = T[i].minNow = v;<br>        return;<br>    }<br>    int mid = (T[i].left + T[i].right) &gt;&gt; 1;<br>    if (k &lt;= mid)<br>        update_single(2 </em> i, k, v);<br>    else<br>        update_single(2 * i + 1, k, v);<br>    pushup(i);//注意更新线段树<br>}<br>int main() {<br>    int ans, k, v;<br>    cin &gt;&gt; n;<br>    for (int i = 1; i &lt;= n; i++)<br>        scanf_s(“%d”, &amp;value[i]);<br>    build(1, 1, n);<br>    cin &gt;&gt; m;<br>    while (m–) {<br>        cin &gt;&gt; k &gt;&gt; v;<br>        update_single(1, k, v);<br>        if (T[1].sum == T[1].maxNow)<br>            ans = T[1].sum - T[1].minNow;<br>        else<br>            ans = max(T[1].maxNow, T[1].sum - T[1].minNow);<br>        cout &lt;&lt; ans &lt;&lt; endl;<br>    }<br>}<br></code></p>
+        <p>程序用堆来储存动态分配的对象，即那些在程序运行时分配的对象。动态对象的生存期由程序来控制，当动态对象不再使用时，我们的代码必须显示地销毁它们。<br><strong>动态内存与智能指针</strong><br>动态内存的管理通过一对操作运算符来完成。<br>new，在动态内存中为对象分配空间，并返回一个指向该对象的指针；<br>delete，接受一个动态对象的指针，销毁该对象，并释放与之相关的内存。<br>1.忘记释放内存，产生内存泄露；<br>2.尚有指针引用内存的情况下释放了它，产生引用非法内存的指针。</p>
+<p>两种智能指针，负责自动释放所指向的对象,定义在memory头文件中。<br>shared_ptr 允许多个指针指向同一个对象；<br>unique_ptr 独占指向的对象；</p>
+<p><strong>创建智能指针</strong><br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="built_in">shared_ptr</span>&lt;<span class="built_in">string</span>&gt; p1;<span class="comment">//shared_ptr，可以指向string</span></div><div class="line"><span class="built_in">shared_ptr</span>&lt;<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt;&gt; p2;</div><div class="line"><span class="comment">//使用大致与普通指针类似</span></div><div class="line"><span class="keyword">if</span>(p1 &amp;&amp; p1-&gt;empty())</div><div class="line">   *p1=<span class="string">"hi"</span>;</div></pre></td></tr></table></figure></p>
+<p><strong>make_shared函数</strong><br>最安全的分配和使用动态内存的方法是调用一个名为make_shared的标准库函数，定义在memory头文件中。<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p3 = make_shared&lt;<span class="keyword">int</span>&gt;(<span class="number">42</span>);</div><div class="line"><span class="built_in">shared_ptr</span>&lt;<span class="built_in">string</span>&gt; p4 = make_shared&lt;<span class="built_in">string</span>&gt;(<span class="number">10</span>,<span class="string">'9'</span>);</div><div class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p5 = make_shared&lt;<span class="keyword">int</span>&gt;();<span class="comment">//指向一个值初始化的int,值为0</span></div></pre></td></tr></table></figure></p>
+<p>程序使用动态内存出于以下的三个原因之一：<br>1.程序不知道自己需要使用多少个对象，例如容器类；<br>2.程序不知道对象的准确类型；<br>3.程序需要在多个对象之间共享数据，以下的例子用来说明改原因；<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;memory&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;initializer_list&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">StrBlob</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">typedef</span> <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;::size_type size_type;</div><div class="line">	StrBlob();</div><div class="line">	StrBlob(<span class="built_in">initializer_list</span>&lt;<span class="built_in">string</span>&gt; il);</div><div class="line">	<span class="function">size_type <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> data-&gt;size(); &#125;</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> data-&gt;empty(); &#125;</div><div class="line">	<span class="comment">//添加和删除元素</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">push_back</span><span class="params">(<span class="built_in">string</span>&amp; t)</span> </span>&#123; data-&gt;push_back(t); &#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">pop_back</span><span class="params">()</span></span>;</div><div class="line">	<span class="comment">//元素访问</span></div><div class="line">	<span class="function"><span class="built_in">string</span>&amp; <span class="title">front</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="built_in">string</span>&amp; <span class="title">back</span><span class="params">()</span></span>;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="built_in">shared_ptr</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; data;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">check</span><span class="params">(size_type i, <span class="keyword">const</span> <span class="built_in">string</span>&amp; msg)</span> <span class="keyword">const</span></span>;</div><div class="line">&#125;;</div><div class="line"><span class="comment">//构造函数</span></div><div class="line">StrBlob::StrBlob():data(make_shared&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt;())&#123;&#125;</div><div class="line">StrBlob::StrBlob(<span class="built_in">initializer_list</span>&lt;<span class="built_in">string</span>&gt; il):</div><div class="line">	data(make_shared&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt;(il))&#123;&#125;</div><div class="line"><span class="comment">//检查给定的索引是否在合法的范围内</span></div><div class="line"><span class="keyword">void</span> StrBlob::check(size_type i, <span class="keyword">const</span> <span class="built_in">string</span>&amp; msg) <span class="keyword">const</span> &#123;</div><div class="line">	<span class="keyword">if</span> (i &gt;= data-&gt;size())</div><div class="line">		<span class="keyword">throw</span> out_of_range(msg);</div><div class="line">&#125;</div><div class="line"><span class="built_in">string</span>&amp; StrBlob::front() &#123;</div><div class="line">	check(<span class="number">0</span>, <span class="string">"Front on empty StrBlob"</span>);</div><div class="line">	<span class="keyword">return</span> data-&gt;front();</div><div class="line">&#125;</div><div class="line"><span class="built_in">string</span>&amp; StrBlob::back() &#123;</div><div class="line">	check(<span class="number">0</span>, <span class="string">"Back on empty StrBlob"</span>);</div><div class="line">	<span class="keyword">return</span> data-&gt;back();</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> StrBlob::pop_back() &#123;</div><div class="line">	check(<span class="number">0</span>, <span class="string">"pop_back on empty StrBlob"</span>);</div><div class="line">	data-&gt;pop_back();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>直接管理内存</strong><br>使用new动态分配和初始化对象<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="keyword">int</span> *p1 = <span class="keyword">new</span> <span class="keyword">int</span>;<span class="comment">//p指向一个动态分配的、未初始化的无名对象</span></div><div class="line"><span class="built_in">string</span> *ps = <span class="keyword">new</span> <span class="built_in">string</span>;<span class="comment">//初始化为空的string</span></div><div class="line"><span class="keyword">int</span> *pi = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">1024</span>);</div><div class="line"><span class="built_in">string</span> *ps = <span class="keyword">new</span> <span class="built_in">string</span>(<span class="number">10</span>,<span class="string">'9'</span>);</div><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; *pv = <span class="keyword">new</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</div></pre></td></tr></table></figure></p>
+<p><strong>释放动态内存</strong><br>delete p//p必须指向一个动态分配的对象或者是一个空指针<br>1.销毁给定的指针指向的对象；<br>2.释放对应的内存；</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="keyword">int</span> i,*pil=&amp;i,*pi2=<span class="literal">nullptr</span>;</div><div class="line"><span class="keyword">double</span> *pd = <span class="keyword">new</span> <span class="keyword">double</span>(<span class="number">33</span>),*pd2=pd;</div><div class="line"><span class="keyword">delete</span> i;<span class="comment">//错误，i不是一个指针</span></div><div class="line"><span class="keyword">delete</span> pil<span class="comment">//未定义,pil指向一个局部变量,释放一个并非new分配的内存的行为是未定义的</span></div><div class="line"><span class="keyword">delete</span> pd;<span class="comment">//正确</span></div><div class="line"><span class="keyword">delete</span> pd2;<span class="comment">//未定义，pd2指向的内存已经被释放掉了</span></div><div class="line"><span class="keyword">delete</span> pi2;<span class="comment">//正确，释放一个空指针总是没有错误的</span></div></pre></td></tr></table></figure>
+<p>对于一个由内置指针管理的动态对象，直到被显示释放之前它都是一直存在的。<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="comment">//factory 返回一个指针，指向一个动态分配的对象</span></div><div class="line"><span class="function">Foo* <span class="title">factory</span><span class="params">(T arg)</span></span>&#123;</div><div class="line">    <span class="comment">//处理arg</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Foo(arg);<span class="comment">//调用者负责释放此内存</span></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">use_factory</span><span class="params">(T arg)</span></span>&#123;</div><div class="line">    Foo* p = factory(arg);</div><div class="line">    <span class="comment">//使用p但是不delete它</span></div><div class="line">&#125;<span class="comment">//p离开了作用域，但它所指向的内存没有被释放掉</span></div><div class="line"></div><div class="line"><span class="comment">//修正的方法</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">use_factory</span><span class="params">(arg)</span></span>&#123;</div><div class="line">    Foo *p = factory(arg);</div><div class="line">    <span class="comment">//使用p</span></div><div class="line">    <span class="keyword">delete</span> p;<span class="comment">//记得释放内存</span></div><div class="line">&#125;</div><div class="line"><span class="function">Foo* <span class="title">use_factory</span><span class="params">(arg)</span></span>&#123;</div><div class="line">    Foo *p =fatcory(arg);</div><div class="line">    <span class="comment">//使用p</span></div><div class="line">    <span class="keyword">return</span> p;<span class="comment">//调用者负责释放内存</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
 
@@ -234,15 +237,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ACM</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线段树</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">c++primer</a>
         		</li>
       		
 		</ul>
@@ -298,7 +293,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://Persuingsdu.github.io/2017/10/05/线段树基本操作-一/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://Persuingsdu.github.io/2017/11/23/动态内存与智能指针/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -315,18 +310,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/10/06/并查集/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          并查集
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/10/05/关于郑州的记忆/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">关于郑州的记忆</div>
+    <a href="/2017/11/19/双向链表/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">双向链表</div>
       <i class="icon-circle-right"></i>
     </a>
   
