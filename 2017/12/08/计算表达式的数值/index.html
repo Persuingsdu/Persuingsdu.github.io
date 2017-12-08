@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://Persuingsdu.github.io">
-  <title>Archives | Persuing</title>
+  <title>计算表达式的数值 | Persuing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Persuing">
-<meta property="og:url" content="http://Persuingsdu.github.io/archives/index.html">
+  <meta name="description" content="2017/12/8">
+<meta name="keywords" content="数据结构作业">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算表达式的数值">
+<meta property="og:url" content="http://Persuingsdu.github.io/2017/12/08/计算表达式的数值/index.html">
 <meta property="og:site_name" content="Persuing">
+<meta property="og:description" content="2017/12/8">
+<meta property="og:updated_time" content="2017-12-08T12:26:29.876Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Persuing">
+<meta name="twitter:title" content="计算表达式的数值">
+<meta name="twitter:description" content="2017/12/8">
   
   
     <link rel="icon" href="/favicon.png">
@@ -129,36 +134,112 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-计算表达式的数值" class="article article-type-post " itemscope itemprop="blogPost">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/08/计算表达式的数值/" class="archive-article-date">
-  	<time datetime="2017-12-08T12:02:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-08</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/08/计算表达式的数值/">计算表达式的数值</a>
+  
+  
+  
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      计算表达式的数值
     </h1>
   
 
-        <div class="article-info info-on-right">
+        
+        <a href="/2017/12/08/计算表达式的数值/" class="archive-article-date">
+  	<time datetime="2017-12-08T12:02:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-08</time>
+</a>
+        
+      </header>
+
+      
+
+
+
+
+
+
+
+
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong><em>2017/12/8</em></strong><br><a id="more"></a></p>
+<p><strong>计算表达式的数值</strong><br>这个方法计算不含有括号的数值，也是核心的内容。<br>首先处理掉乘号与除号,然后计算数值;用一个队列来储存加号与减号;<br>用一个双向队列来存放数值，思想是遇到乘法或者除法,先取出两个数，然后计算出结果，然后在存入队列；<br>处理完表达式中的乘法和除法之后，然后再计算数值；<br>这里面的缺点数精度的丢失，防止精度丢失，还得用String处理高精度问题；</p>
+<ul>
+<li>代码<figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">cal</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">	<span class="built_in">queue</span>&lt;<span class="keyword">char</span>&gt; f;</div><div class="line">	<span class="built_in">deque</span>&lt;<span class="keyword">double</span>&gt; value;</div><div class="line">	<span class="keyword">if</span> (s.size() == <span class="number">0</span>)</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = l; i &lt; r; ) &#123;</div><div class="line">		<span class="keyword">if</span> (<span class="built_in">isdigit</span>(s[i]) || s[i] == <span class="string">'.'</span>) &#123;</div><div class="line">			<span class="built_in">string</span> ss = <span class="string">""</span>;</div><div class="line">			<span class="keyword">while</span> ((<span class="built_in">isdigit</span>(s[i]) || s[i] == <span class="string">'.'</span>) &amp;&amp; i&lt;r) &#123;</div><div class="line">				ss += s[i];</div><div class="line">				i++;</div><div class="line">			&#125;</div><div class="line">			value.push_back(atof(ss.c_str()));</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (s[i] == <span class="string">'+'</span> || s[i] == <span class="string">'-'</span>) &#123;</div><div class="line">			f.push(s[i]);</div><div class="line">			i++;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (s[i] == <span class="string">'*'</span>) &#123;</div><div class="line">			<span class="keyword">double</span> x1 = value.back();</div><div class="line">			value.pop_back();</div><div class="line">			<span class="built_in">string</span> p = <span class="string">""</span>;</div><div class="line">			<span class="keyword">while</span> ((<span class="built_in">isdigit</span>(s[i + <span class="number">1</span>]) || s[i + <span class="number">1</span>] == <span class="string">'.'</span>) &amp;&amp; i + <span class="number">1</span> &lt; r) &#123;</div><div class="line">				p += s[i + <span class="number">1</span>];</div><div class="line">				i++;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">double</span> x2 = atof(p.c_str());</div><div class="line">			<span class="keyword">double</span> multi = x1*x2;</div><div class="line">			value.push_back(multi);</div><div class="line">			i++;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (s[i] == <span class="string">'/'</span>) &#123;</div><div class="line">			<span class="keyword">double</span> y1 = value.back();</div><div class="line">			value.pop_back();</div><div class="line">			<span class="built_in">string</span> p = <span class="string">""</span>;</div><div class="line">			<span class="keyword">while</span> ((<span class="built_in">isdigit</span>(s[i + <span class="number">1</span>]) || s[i + <span class="number">1</span>] == <span class="string">'.'</span>) &amp;&amp; i + <span class="number">1</span>&lt;r) &#123;</div><div class="line">				p += s[i + <span class="number">1</span>];</div><div class="line">				i++;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">double</span> y2 = atof(p.c_str());</div><div class="line">			<span class="keyword">double</span> divi = y1 / y2;</div><div class="line">			value.push_back(divi);</div><div class="line">			i++;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">while</span> (!f.empty()) &#123;</div><div class="line">		<span class="keyword">if</span> (f.front() == <span class="string">'-'</span>) &#123;</div><div class="line">			<span class="keyword">double</span> s1 = value.front();</div><div class="line">			value.pop_front();</div><div class="line">			<span class="keyword">double</span> s2 = value.front();</div><div class="line">			value.pop_front();</div><div class="line">			value.push_front(s1 - s2);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (f.front() == <span class="string">'+'</span>) &#123;</div><div class="line">			<span class="keyword">double</span> s1 = value.front();</div><div class="line">			value.pop_front();</div><div class="line">			<span class="keyword">double</span> s2 = value.front();</div><div class="line">			value.pop_front();</div><div class="line">			value.push_front(s1 + s2);</div><div class="line">		&#125;</div><div class="line">		f.pop();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> value.front();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>计算含有括号</strong><br>遇到不是 ) 就存进栈中，遇到 ) ,就计算出最近的左括号和这个右括号中的表达式的值，存进栈中。</p>
+<ul>
+<li>代码<figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">calculate</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">	<span class="built_in">stack</span>&lt;<span class="keyword">char</span>&gt; a;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); i++) &#123;</div><div class="line">		<span class="keyword">if</span> (s[i] != <span class="string">')'</span>)</div><div class="line">			a.push(s[i]);</div><div class="line">		<span class="keyword">if</span> (s[i] == <span class="string">')'</span>) &#123;</div><div class="line">			<span class="built_in">string</span> ss = <span class="string">""</span>;</div><div class="line">			<span class="keyword">while</span> (!a.empty() &amp;&amp; a.top() != <span class="string">'('</span>) &#123;</div><div class="line">				ss += a.top();</div><div class="line">				a.pop();</div><div class="line">			&#125;</div><div class="line">			a.pop();</div><div class="line">			reverse(ss.begin(), ss.end());</div><div class="line">			<span class="keyword">double</span> p = cal(<span class="number">0</span>, ss.size(), ss);</div><div class="line">			<span class="built_in">string</span> r = to_string(p);</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; r.size(); i++)</div><div class="line">				a.push(r[i]);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">string</span> res = <span class="string">""</span>;</div><div class="line">	<span class="keyword">while</span> (!a.empty()) &#123;</div><div class="line">		res += a.top();</div><div class="line">		a.pop();</div><div class="line">	&#125;</div><div class="line">	reverse(res.begin(), res.end());</div><div class="line">	<span class="keyword">return</span> cal(<span class="number">0</span>, res.size(), res);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>注意</strong></p>
+<ul>
+<li>STL中stack、queue、deque的使用;</li>
+<li>使用atof、stringstream将字符串转化为数字时，注意精度的丢失;</li>
+<li>想要保留精度，可以不用转成数字，直接利用string，利用高精度计算出表达式的值;</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+
+            
+
+
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>Thank u !<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.png">
+                      <span class="reward-type">微信</span>
+                      
+                      <span id="busuanzi_container_page_pv" font="宋体" style="color:pink; display:inline">
+                        View  <span id="busuanzi_value_page_pv" font="宋体" style="color:pink"></span>
+                     </span>
           
+                  
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+
+
+    
+
+
+
+
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -170,377 +251,109 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://Persuingsdu.github.io/2017/12/08/计算表达式的数值/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/23/动态内存与智能指针/" class="archive-article-date">
-  	<time datetime="2017-11-23T06:51:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-23</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/23/动态内存与智能指针/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">动态内存与智能指针</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/23/动态内存与智能指针/">动态内存与智能指针</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">c++primer</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/19/双向链表/" class="archive-article-date">
-  	<time datetime="2017-11-19T11:45:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/19/双向链表/">双向链表</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/29/Leetcode-Backtracking/" class="archive-article-date">
-  	<time datetime="2017-10-29T03:09:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/29/Leetcode-Backtracking/">Leetcode Backtracking</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/22/BFS/" class="archive-article-date">
-  	<time datetime="2017-10-22T07:23:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/22/BFS/">BST</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bst</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/15/DFS/" class="archive-article-date">
-  	<time datetime="2017-10-15T15:58:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/15/DFS/">Leetcode</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/06/并查集/" class="archive-article-date">
-  	<time datetime="2017-10-06T11:41:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/06/并查集/">并查集</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">并查集</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/05/线段树基本操作-一/" class="archive-article-date">
-  	<time datetime="2017-10-05T14:44:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/05/线段树基本操作-一/">线段树基本操作(一)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ACM</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线段树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/05/关于郑州的记忆/" class="archive-article-date">
-  	<time datetime="2017-10-05T07:33:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/05/关于郑州的记忆/">关于郑州的记忆</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">生活杂感</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/04/My-first-blog/" class="archive-article-date">
-  	<time datetime="2017-10-04T14:00:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/04/My-first-blog/">My first blog</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">生活杂感</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -572,8 +385,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
