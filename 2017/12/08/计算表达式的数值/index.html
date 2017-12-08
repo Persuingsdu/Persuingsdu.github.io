@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://Persuingsdu.github.io/2017/12/08/计算表达式的数值/index.html">
 <meta property="og:site_name" content="Persuing">
 <meta property="og:description" content="2017/12/8">
-<meta property="og:updated_time" content="2017-12-08T12:26:29.876Z">
+<meta property="og:updated_time" content="2017-12-08T12:34:00.722Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算表达式的数值">
 <meta name="twitter:description" content="2017/12/8">
@@ -173,7 +173,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><strong><em>2017/12/8</em></strong><br><a id="more"></a></p>
-<p><strong>计算表达式的数值</strong><br>这个方法计算不含有括号的数值，也是核心的内容。<br>首先处理掉乘号与除号,然后计算数值;用一个队列来储存加号与减号;<br>用一个双向队列来存放数值，思想是遇到乘法或者除法,先取出两个数，然后计算出结果，然后在存入队列；<br>处理完表达式中的乘法和除法之后，然后再计算数值；<br>这里面的缺点数精度的丢失，防止精度丢失，还得用String处理高精度问题；</p>
+<p><strong>计算表达式的数值</strong><br>这个方法计算不含有括号的数值，也是核心的内容。<br>首先处理掉乘号与除号,然后计算数值;用一个队列来储存加号与减号;<br>用一个双向队列来存放数值，思想是遇到乘法或者除法,先取出两个数，然后计算出结果，然后再存入队列；<br>处理完表达式中的乘法和除法之后，然后再计算数值；</p>
 <ul>
 <li>代码<figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">cal</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">	<span class="built_in">queue</span>&lt;<span class="keyword">char</span>&gt; f;</div><div class="line">	<span class="built_in">deque</span>&lt;<span class="keyword">double</span>&gt; value;</div><div class="line">	<span class="keyword">if</span> (s.size() == <span class="number">0</span>)</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = l; i &lt; r; ) &#123;</div><div class="line">		<span class="keyword">if</span> (<span class="built_in">isdigit</span>(s[i]) || s[i] == <span class="string">'.'</span>) &#123;</div><div class="line">			<span class="built_in">string</span> ss = <span class="string">""</span>;</div><div class="line">			<span class="keyword">while</span> ((<span class="built_in">isdigit</span>(s[i]) || s[i] == <span class="string">'.'</span>) &amp;&amp; i&lt;r) &#123;</div><div class="line">				ss += s[i];</div><div class="line">				i++;</div><div class="line">			&#125;</div><div class="line">			value.push_back(atof(ss.c_str()));</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (s[i] == <span class="string">'+'</span> || s[i] == <span class="string">'-'</span>) &#123;</div><div class="line">			f.push(s[i]);</div><div class="line">			i++;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (s[i] == <span class="string">'*'</span>) &#123;</div><div class="line">			<span class="keyword">double</span> x1 = value.back();</div><div class="line">			value.pop_back();</div><div class="line">			<span class="built_in">string</span> p = <span class="string">""</span>;</div><div class="line">			<span class="keyword">while</span> ((<span class="built_in">isdigit</span>(s[i + <span class="number">1</span>]) || s[i + <span class="number">1</span>] == <span class="string">'.'</span>) &amp;&amp; i + <span class="number">1</span> &lt; r) &#123;</div><div class="line">				p += s[i + <span class="number">1</span>];</div><div class="line">				i++;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">double</span> x2 = atof(p.c_str());</div><div class="line">			<span class="keyword">double</span> multi = x1*x2;</div><div class="line">			value.push_back(multi);</div><div class="line">			i++;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (s[i] == <span class="string">'/'</span>) &#123;</div><div class="line">			<span class="keyword">double</span> y1 = value.back();</div><div class="line">			value.pop_back();</div><div class="line">			<span class="built_in">string</span> p = <span class="string">""</span>;</div><div class="line">			<span class="keyword">while</span> ((<span class="built_in">isdigit</span>(s[i + <span class="number">1</span>]) || s[i + <span class="number">1</span>] == <span class="string">'.'</span>) &amp;&amp; i + <span class="number">1</span>&lt;r) &#123;</div><div class="line">				p += s[i + <span class="number">1</span>];</div><div class="line">				i++;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">double</span> y2 = atof(p.c_str());</div><div class="line">			<span class="keyword">double</span> divi = y1 / y2;</div><div class="line">			value.push_back(divi);</div><div class="line">			i++;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">while</span> (!f.empty()) &#123;</div><div class="line">		<span class="keyword">if</span> (f.front() == <span class="string">'-'</span>) &#123;</div><div class="line">			<span class="keyword">double</span> s1 = value.front();</div><div class="line">			value.pop_front();</div><div class="line">			<span class="keyword">double</span> s2 = value.front();</div><div class="line">			value.pop_front();</div><div class="line">			value.push_front(s1 - s2);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (f.front() == <span class="string">'+'</span>) &#123;</div><div class="line">			<span class="keyword">double</span> s1 = value.front();</div><div class="line">			value.pop_front();</div><div class="line">			<span class="keyword">double</span> s2 = value.front();</div><div class="line">			value.pop_front();</div><div class="line">			value.push_front(s1 + s2);</div><div class="line">		&#125;</div><div class="line">		f.pop();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> value.front();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
@@ -449,15 +449,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Leetcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">bst</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -469,15 +469,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ACM</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线段树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">并查集</a>
               </li>
              
               <li class="article-tag-list-item">
