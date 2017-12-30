@@ -355,6 +355,20 @@
 <p>关于郑州的记忆<br>关于郑州我知道的不多，为了爱情曾经去过那里<br>多少次在火车上路过这城市，一个人悄悄地想起她<br>她说她喜欢郑州冬天的阳光，巷子里飘满煤炉的味道<br>雾气穿过她年轻的脖子，直到今天都没有散去<br>关于郑州我想的全是你，想来想去都是忏悔和委屈<br>关于郑州我爱的全是你，爱来爱去不明白爱的意义<br>关于郑州只是偶尔想起，现在她的味道都在回忆里<br>每次和朋友说起过去的旅行，我不敢说我曾去过那里<br>关于郑州我想的全是你，想来生活无非是痛苦和美丽<br>关于郑州我爱的全是你，爱到最后我们都无路可去<br>似是而非或是世事可畏，有情有义又是有米无炊<br>时间改变了很多又什么都没有<br>让我再一次拥抱你，郑州</p>
 </blockquote>
 
+      <script>
+        window.disqusProxy={
+          shortname: 'persuing',
+          username: 'persuing',
+          server: 'disqus-proxy.sdu1901.top',
+          port: 443,
+          adminAvatar: '/avatars/admin-avatar.jpg',
+          identifier: '2017/10/05/关于郑州的记忆/',
+        };
+        window.disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = window.disqusProxy.identifier;
+        };
+      </script>
       
     </div>
     
@@ -427,7 +441,13 @@
 
   
     <div class="comments" id="comments">
-      <div id="disqus_thread">
+      
+      <script src="//cdn.bootcss.com/react/16.0.0/umd/react.production.min.js"></script>
+      <script src="//cdn.bootcss.com/react-dom/16.0.0/umd/react-dom.production.min.js"></script>
+      <script src="//cdn.bootcss.com/fetch/2.0.3/fetch.min.js"></script>
+      <script src="//cdn.jsdelivr.net/npm/blockies-identicon@0.1.0/blockies.min.js"></script>
+      <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+      <div id="disqus_proxy_thread"><script src="/scripts/hexo-disqus-proxy-primary.js" async></script>
         <noscript>
           Please enable JavaScript to view the
           <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
@@ -703,9 +723,9 @@
           this.page.title = '关于郑州的记忆';
         };
         var d = document, s = d.createElement('script');
-        s.src = 'https://persuing.disqus.com/embed.js';
+        
         s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
+        
       </script>
     
 

@@ -375,6 +375,20 @@
         <p>字符串問題<br><a id="more"></a><br><a href="http://blog.csdn.net/v_JULY_v/article/details/7041827" target="_blank" rel="external">參考鏈接</a><br>讀書筆記，大致了解一下。<br>KMP算法的關鍵在于求出next數組，next數組考慮的是除當前字符外的最長相同的前綴和後綴。<br>next數組告訴我們，當模式串中的某個字符跟文本串中的某個字符匹配失配時，模式串下一步應該跳到哪個位置。<br>注意前綴不包含最後一個元素，後綴不包含第一個元素。<br>失配時，模式串向右移動的位數為：失配字符所在位置 - 失配字符對應的next值。<br>問題的關鍵在于如何計算出<strong>next數組</strong>。<br>遞推計算出next數組<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">getNext</span><span class="params">(<span class="built_in">string</span> p, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; next)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> size = p.size();</div><div class="line">	next[<span class="number">0</span>] = <span class="number">-1</span>;</div><div class="line">	<span class="keyword">int</span> k = <span class="number">-1</span>;</div><div class="line">	<span class="keyword">int</span> j = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span> (j &lt; size - <span class="number">1</span>) &#123;</div><div class="line">		<span class="comment">//p[k]表示前缀，p[j]表示后缀  </span></div><div class="line">		<span class="keyword">if</span> (k == <span class="number">-1</span> || p[j] == p[k]) &#123;</div><div class="line">			++k;</div><div class="line">			++j;</div><div class="line">			<span class="keyword">if</span> (p[j] != p[k])</div><div class="line">				next[j] = k;     </div><div class="line">			<span class="keyword">else</span></div><div class="line">				next[j] = next[k];</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span></div><div class="line">			k = next[k];</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>基于next數組的字符串匹配<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">KmpSearch</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> p,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; next)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> j = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> sLen = s.size();</div><div class="line">	<span class="keyword">int</span> pLen = p.size();</div><div class="line">	<span class="keyword">while</span> (i &lt; sLen &amp;&amp; j &lt; pLen) &#123;</div><div class="line">		<span class="comment">//①如果j = -1，或者当前字符匹配成功（即S[i] == P[j]），都令i++，j++      </span></div><div class="line">		<span class="keyword">if</span> (j == <span class="number">-1</span> || s[i] == p[j]) &#123;</div><div class="line">			i++;</div><div class="line">			j++;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span></div><div class="line">			<span class="comment">//②如果j != -1，且当前字符匹配失败（即S[i] != P[j]），则令 i 不变，j = next[j]      </span></div><div class="line">			<span class="comment">//next[j]即为j所对应的next值    </span></div><div class="line">			<span class="comment">//移动</span></div><div class="line">			j = next[j];</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (j == pLen)</div><div class="line">		<span class="keyword">return</span> i - j;</div><div class="line">	<span class="keyword">else</span></div><div class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
+      <script>
+        window.disqusProxy={
+          shortname: 'persuing',
+          username: 'persuing',
+          server: 'disqus-proxy.sdu1901.top',
+          port: 443,
+          adminAvatar: '/avatars/admin-avatar.jpg',
+          identifier: '2017/12/29/KMP/',
+        };
+        window.disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = window.disqusProxy.identifier;
+        };
+      </script>
       
     </div>
     
@@ -443,7 +457,13 @@
 
   
     <div class="comments" id="comments">
-      <div id="disqus_thread">
+      
+      <script src="//cdn.bootcss.com/react/16.0.0/umd/react.production.min.js"></script>
+      <script src="//cdn.bootcss.com/react-dom/16.0.0/umd/react-dom.production.min.js"></script>
+      <script src="//cdn.bootcss.com/fetch/2.0.3/fetch.min.js"></script>
+      <script src="//cdn.jsdelivr.net/npm/blockies-identicon@0.1.0/blockies.min.js"></script>
+      <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+      <div id="disqus_proxy_thread"><script src="/scripts/hexo-disqus-proxy-primary.js" async></script>
         <noscript>
           Please enable JavaScript to view the
           <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
@@ -719,9 +739,9 @@
           this.page.title = 'KMP';
         };
         var d = document, s = d.createElement('script');
-        s.src = 'https://persuing.disqus.com/embed.js';
+        
         s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
+        
       </script>
     
 

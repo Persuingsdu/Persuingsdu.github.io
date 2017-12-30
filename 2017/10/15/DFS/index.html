@@ -363,6 +363,20 @@
 <h2 id="Path-Sum"><a href="#Path-Sum" class="headerlink" title="Path Sum"></a>Path Sum</h2><p><a href="https://leetcode.com/problems/path-sum/description/" target="_blank" rel="external">link</a><br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="keyword">bool</span> ans;</div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">hasPathSum</span><span class="params">(TreeNode* root, <span class="keyword">int</span> sum)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">		<span class="keyword">if</span> (root-&gt;left == <span class="literal">NULL</span>&amp;&amp;root-&gt;right == <span class="literal">NULL</span>) &#123;</div><div class="line">			<span class="keyword">if</span> (sum==root-&gt;val)</div><div class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">			<span class="keyword">else</span></div><div class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (root-&gt;left != <span class="literal">NULL</span>) </div><div class="line">			ans = hasPathSum(root-&gt;left, sum - root-&gt;val);</div><div class="line">        <span class="keyword">if</span>(ans==<span class="literal">true</span>)</div><div class="line">            <span class="keyword">return</span> ans;</div><div class="line">		<span class="keyword">if</span> (root-&gt;right != <span class="literal">NULL</span>)</div><div class="line">			ans = hasPathSum(root-&gt;right, sum - root-&gt;val);</div><div class="line">		<span class="keyword">return</span> ans;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="Binary-Tree-Paths"><a href="#Binary-Tree-Paths" class="headerlink" title="Binary Tree Paths"></a>Binary Tree Paths</h2><p><a href="https://leetcode.com/problems/binary-tree-paths/description/" target="_blank" rel="external">link</a><br>去掉了多余内容，只保留主要代码<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="built_in">string</span> ans = <span class="string">""</span>;</div><div class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; s;</div><div class="line"><span class="comment">//前提0-9</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">help</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">	ans += root-&gt;val + <span class="string">'0'</span>;</div><div class="line">	<span class="keyword">if</span> (root-&gt;left == <span class="literal">NULL</span>&amp;&amp;root-&gt;right == <span class="literal">NULL</span>) &#123;</div><div class="line">		s.push_back(ans);</div><div class="line">		ans.erase(ans.end() - <span class="number">1</span>);</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (root-&gt;left != <span class="literal">NULL</span>) </div><div class="line">		help(root-&gt;left);	</div><div class="line">	<span class="keyword">if</span> (root-&gt;right != <span class="literal">NULL</span>) </div><div class="line">		help(root-&gt;right);	</div><div class="line">	ans.erase(ans.end() - <span class="number">1</span>);<span class="comment">//回溯</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
+      <script>
+        window.disqusProxy={
+          shortname: 'persuing',
+          username: 'persuing',
+          server: 'disqus-proxy.sdu1901.top',
+          port: 443,
+          adminAvatar: '/avatars/admin-avatar.jpg',
+          identifier: '2017/10/15/DFS/',
+        };
+        window.disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = window.disqusProxy.identifier;
+        };
+      </script>
       
     </div>
     
@@ -435,7 +449,13 @@
 
   
     <div class="comments" id="comments">
-      <div id="disqus_thread">
+      
+      <script src="//cdn.bootcss.com/react/16.0.0/umd/react.production.min.js"></script>
+      <script src="//cdn.bootcss.com/react-dom/16.0.0/umd/react-dom.production.min.js"></script>
+      <script src="//cdn.bootcss.com/fetch/2.0.3/fetch.min.js"></script>
+      <script src="//cdn.jsdelivr.net/npm/blockies-identicon@0.1.0/blockies.min.js"></script>
+      <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+      <div id="disqus_proxy_thread"><script src="/scripts/hexo-disqus-proxy-primary.js" async></script>
         <noscript>
           Please enable JavaScript to view the
           <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
@@ -736,9 +756,9 @@
           this.page.title = 'Leetcode';
         };
         var d = document, s = d.createElement('script');
-        s.src = 'https://persuing.disqus.com/embed.js';
+        
         s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
+        
       </script>
     
 

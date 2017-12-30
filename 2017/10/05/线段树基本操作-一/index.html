@@ -357,6 +357,20 @@
 <h2 id="调试代码"><a href="#调试代码" class="headerlink" title="调试代码"></a>调试代码</h2><p><code><br>const int maxn = 256;<br>int segTree[4 <em> maxn + 10];<br>int value[maxn];<br>int main() {<br>    //开的空间为4</em>N<br>    value[0] = 1; value[1] = 2; value[2] = 2;<br>    value[3] = 4; value[4] = 9; value[5] = 3;<br>    build(1, 0, 5);<br>    for (int i = 1; i &lt;= 20; i++)<br>        cout &lt;&lt; “seg “ &lt;&lt; i &lt;&lt; “=” &lt;&lt; segTree[i] &lt;&lt; endl;<br>    //我们定义pushup得到的最终结果便是segTree[1]<br>    update_single(1, 0, 5, 3, 8);<br>    query(1, 0, 5, 2, 4);<br>}</code></p>
 <p><strong><em>2017/10/9 于图书馆更新</em></strong><br><a href="http://blog.csdn.net/ww140142/article/details/46366241" target="_blank" rel="external">例题 Potted Flower</a><br><code><br>const int maxn = 100010;<br>struct node {<br>    int sum, maxNow, minNow;<br>    int lmax, lmin;<br>    int rmax, rmin;<br>    int left, right;<br>} T[4 <em> maxn];<br>int value[maxn];<br>int n, m;//点数，修改次数<br>void pushup(int i) {<br>    T[i].sum = T[2 </em> i].sum + T[2 <em> i + 1].sum;<br>    T[i].lmax = max(T[2 </em> i].lmax, T[2 <em> i].sum + T[2 </em> i + 1].lmax);<br>    T[i].lmin = min(T[2 <em> i].lmin, T[2 </em> i].sum + T[2 <em> i + 1].lmin);<br>    T[i].rmax = max(T[2 </em> i + 1].rmax, T[2 <em> i + 1].sum + T[2 </em> i].rmax);<br>    T[i].rmin = min(T[2 <em> i + 1].rmin, T[2 </em> i + 1].sum + T[2 <em> i].rmin);<br>    T[i].maxNow = max(max(T[2 </em> i].maxNow, T[2 <em> i + 1].maxNow), T[2 </em> i].rmax + T[2 <em> i + 1].lmax);<br>    T[i].minNow = min(min(T[2 </em> i].minNow, T[2 <em> i + 1].minNow), T[2 </em> i].rmin + T[2 <em> i + 1].lmin);<br>}<br>void build(int i, int l, int r) {<br>    T[i].left = l;<br>    T[i].right = r;<br>    if (l == r) {//叶子结点，将所有数据初始化为data[end],也就是线段树的元线段<br>        T[i].sum = T[i].lmax = T[i].lmin = T[i].rmax =<br>            T[i].rmin = T[i].maxNow = T[i].minNow = value[l];<br>    }<br>    else {//左右递归进行建树<br>        int mid = (l + r) &gt;&gt; 1;<br>        build(2 </em> i, l, mid);<br>        build(2 <em> i + 1, mid+1, r);<br>        pushup(i);<br>    }<br>}<br>//i代表线段树中的节点,k代表要更新的数字的position,v代表value<br>void update_single(int i,int k,int v) {<br>    if (T[i].left == T[i].right) {//更新叶子结点<br>        T[i].sum = T[i].lmax = T[i].lmin = T[i].rmax =<br>            T[i].rmin = T[i].maxNow = T[i].minNow = v;<br>        return;<br>    }<br>    int mid = (T[i].left + T[i].right) &gt;&gt; 1;<br>    if (k &lt;= mid)<br>        update_single(2 </em> i, k, v);<br>    else<br>        update_single(2 * i + 1, k, v);<br>    pushup(i);//注意更新线段树<br>}<br>int main() {<br>    int ans, k, v;<br>    cin &gt;&gt; n;<br>    for (int i = 1; i &lt;= n; i++)<br>        scanf_s(“%d”, &amp;value[i]);<br>    build(1, 1, n);<br>    cin &gt;&gt; m;<br>    while (m–) {<br>        cin &gt;&gt; k &gt;&gt; v;<br>        update_single(1, k, v);<br>        if (T[1].sum == T[1].maxNow)<br>            ans = T[1].sum - T[1].minNow;<br>        else<br>            ans = max(T[1].maxNow, T[1].sum - T[1].minNow);<br>        cout &lt;&lt; ans &lt;&lt; endl;<br>    }<br>}<br></code></p>
 
+      <script>
+        window.disqusProxy={
+          shortname: 'persuing',
+          username: 'persuing',
+          server: 'disqus-proxy.sdu1901.top',
+          port: 443,
+          adminAvatar: '/avatars/admin-avatar.jpg',
+          identifier: '2017/10/05/线段树基本操作-一/',
+        };
+        window.disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = window.disqusProxy.identifier;
+        };
+      </script>
       
     </div>
     
@@ -433,7 +447,13 @@
 
   
     <div class="comments" id="comments">
-      <div id="disqus_thread">
+      
+      <script src="//cdn.bootcss.com/react/16.0.0/umd/react.production.min.js"></script>
+      <script src="//cdn.bootcss.com/react-dom/16.0.0/umd/react-dom.production.min.js"></script>
+      <script src="//cdn.bootcss.com/fetch/2.0.3/fetch.min.js"></script>
+      <script src="//cdn.jsdelivr.net/npm/blockies-identicon@0.1.0/blockies.min.js"></script>
+      <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+      <div id="disqus_proxy_thread"><script src="/scripts/hexo-disqus-proxy-primary.js" async></script>
         <noscript>
           Please enable JavaScript to view the
           <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
@@ -734,9 +754,9 @@
           this.page.title = '线段树基本操作(一)';
         };
         var d = document, s = d.createElement('script');
-        s.src = 'https://persuing.disqus.com/embed.js';
+        
         s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
+        
       </script>
     
 

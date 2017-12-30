@@ -83,14 +83,17 @@
 
 
 
+<meta name="description" content="window.disqusProxy={           shortname: &apos;persuing&apos;,           username: &apos;persuing&apos;,           server: &apos;disqus-proxy.sdu1901.top&apos;,           port: 443,           adminAvatar: &apos;/avatar">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Project">
 <meta property="og:url" content="http://Persuingsdu.github.io/project/index.html">
 <meta property="og:site_name" content="Persuing">
+<meta property="og:description" content="window.disqusProxy={           shortname: &apos;persuing&apos;,           username: &apos;persuing&apos;,           server: &apos;disqus-proxy.sdu1901.top&apos;,           port: 443,           adminAvatar: &apos;/avatar">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-12-14T06:26:52.648Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Project">
+<meta name="twitter:description" content="window.disqusProxy={           shortname: &apos;persuing&apos;,           username: &apos;persuing&apos;,           server: &apos;disqus-proxy.sdu1901.top&apos;,           port: 443,           adminAvatar: &apos;/avatar">
 
 
 
@@ -269,6 +272,20 @@
         
         
           
+      <script>
+        window.disqusProxy={
+          shortname: 'persuing',
+          username: 'persuing',
+          server: 'disqus-proxy.sdu1901.top',
+          port: 443,
+          adminAvatar: '/avatars/admin-avatar.jpg',
+          identifier: 'project/index.html',
+        };
+        window.disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = window.disqusProxy.identifier;
+        };
+      </script>
         
       </div>
       
@@ -289,7 +306,13 @@
 
   
     <div class="comments" id="comments">
-      <div id="disqus_thread">
+      
+      <script src="//cdn.bootcss.com/react/16.0.0/umd/react.production.min.js"></script>
+      <script src="//cdn.bootcss.com/react-dom/16.0.0/umd/react-dom.production.min.js"></script>
+      <script src="//cdn.bootcss.com/fetch/2.0.3/fetch.min.js"></script>
+      <script src="//cdn.jsdelivr.net/npm/blockies-identicon@0.1.0/blockies.min.js"></script>
+      <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+      <div id="disqus_proxy_thread"><script src="/scripts/hexo-disqus-proxy-primary.js" async></script>
         <noscript>
           Please enable JavaScript to view the
           <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
@@ -565,9 +588,9 @@
           this.page.title = 'Project';
         };
         var d = document, s = d.createElement('script');
-        s.src = 'https://persuing.disqus.com/embed.js';
+        
         s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
+        
       </script>
     
 

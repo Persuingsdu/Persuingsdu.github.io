@@ -360,6 +360,20 @@
 <figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="keyword">int</span> i,*pil=&amp;i,*pi2=<span class="literal">nullptr</span>;</div><div class="line"><span class="keyword">double</span> *pd = <span class="keyword">new</span> <span class="keyword">double</span>(<span class="number">33</span>),*pd2=pd;</div><div class="line"><span class="keyword">delete</span> i;<span class="comment">//错误，i不是一个指针</span></div><div class="line"><span class="keyword">delete</span> pil<span class="comment">//未定义,pil指向一个局部变量,释放一个并非new分配的内存的行为是未定义的</span></div><div class="line"><span class="keyword">delete</span> pd;<span class="comment">//正确</span></div><div class="line"><span class="keyword">delete</span> pd2;<span class="comment">//未定义，pd2指向的内存已经被释放掉了</span></div><div class="line"><span class="keyword">delete</span> pi2;<span class="comment">//正确，释放一个空指针总是没有错误的</span></div></pre></td></tr></table></figure>
 <p>对于一个由内置指针管理的动态对象，直到被显示释放之前它都是一直存在的。<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="comment">//factory 返回一个指针，指向一个动态分配的对象</span></div><div class="line"><span class="function">Foo* <span class="title">factory</span><span class="params">(T arg)</span></span>&#123;</div><div class="line">    <span class="comment">//处理arg</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Foo(arg);<span class="comment">//调用者负责释放此内存</span></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">use_factory</span><span class="params">(T arg)</span></span>&#123;</div><div class="line">    Foo* p = factory(arg);</div><div class="line">    <span class="comment">//使用p但是不delete它</span></div><div class="line">&#125;<span class="comment">//p离开了作用域，但它所指向的内存没有被释放掉</span></div><div class="line"></div><div class="line"><span class="comment">//修正的方法</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">use_factory</span><span class="params">(arg)</span></span>&#123;</div><div class="line">    Foo *p = factory(arg);</div><div class="line">    <span class="comment">//使用p</span></div><div class="line">    <span class="keyword">delete</span> p;<span class="comment">//记得释放内存</span></div><div class="line">&#125;</div><div class="line"><span class="function">Foo* <span class="title">use_factory</span><span class="params">(arg)</span></span>&#123;</div><div class="line">    Foo *p =fatcory(arg);</div><div class="line">    <span class="comment">//使用p</span></div><div class="line">    <span class="keyword">return</span> p;<span class="comment">//调用者负责释放内存</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
+      <script>
+        window.disqusProxy={
+          shortname: 'persuing',
+          username: 'persuing',
+          server: 'disqus-proxy.sdu1901.top',
+          port: 443,
+          adminAvatar: '/avatars/admin-avatar.jpg',
+          identifier: '2017/11/23/动态内存与智能指针/',
+        };
+        window.disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = window.disqusProxy.identifier;
+        };
+      </script>
       
     </div>
     
@@ -432,7 +446,13 @@
 
   
     <div class="comments" id="comments">
-      <div id="disqus_thread">
+      
+      <script src="//cdn.bootcss.com/react/16.0.0/umd/react.production.min.js"></script>
+      <script src="//cdn.bootcss.com/react-dom/16.0.0/umd/react-dom.production.min.js"></script>
+      <script src="//cdn.bootcss.com/fetch/2.0.3/fetch.min.js"></script>
+      <script src="//cdn.jsdelivr.net/npm/blockies-identicon@0.1.0/blockies.min.js"></script>
+      <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+      <div id="disqus_proxy_thread"><script src="/scripts/hexo-disqus-proxy-primary.js" async></script>
         <noscript>
           Please enable JavaScript to view the
           <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
@@ -708,9 +728,9 @@
           this.page.title = '动态内存与智能指针';
         };
         var d = document, s = d.createElement('script');
-        s.src = 'https://persuing.disqus.com/embed.js';
+        
         s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
+        
       </script>
     
 
