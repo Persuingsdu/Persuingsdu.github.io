@@ -318,8 +318,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/10/22/BFS/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/22/BFS/" itemprop="commentCount"></span>
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2017/10/22/BFS/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -380,20 +379,6 @@
 <figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;utility&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> &#123;</span></div><div class="line">	<span class="keyword">int</span> value;</div><div class="line">	TreeNode* left;</div><div class="line">	TreeNode* right;</div><div class="line">	TreeNode() &#123;</div><div class="line">		value = <span class="number">0</span>;</div><div class="line">		left = right = <span class="literal">NULL</span>;</div><div class="line">	&#125;</div><div class="line">	TreeNode(<span class="keyword">int</span> val) &#123;</div><div class="line">		value = val;</div><div class="line">		left = right = <span class="literal">NULL</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">bst</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	bst() &#123;&#125;;</div><div class="line">	bst(<span class="keyword">int</span> val);</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>&amp; val)</span></span>;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">erase</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>&amp; val)</span></span>;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> capacity; &#125;</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span></span>&#123; <span class="keyword">return</span> capacity == <span class="number">0</span>; &#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">bfs</span><span class="params">()</span></span>;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">int</span> capacity;</div><div class="line">	TreeNode* root;</div><div class="line">&#125;;</div><div class="line">bst::bst(<span class="keyword">int</span> val) &#123;</div><div class="line">	root = <span class="keyword">new</span> TreeNode(val);</div><div class="line">	capacity = <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> bst::bfs() &#123;</div><div class="line">	<span class="keyword">if</span> (capacity == <span class="number">0</span>) <span class="keyword">return</span>;</div><div class="line">	<span class="built_in">queue</span>&lt;TreeNode*&gt; unvisted;</div><div class="line">	unvisted.push(root);</div><div class="line">	<span class="keyword">while</span> (!unvisted.empty()) &#123;</div><div class="line">		TreeNode* current = unvisted.front();</div><div class="line">		unvisted.pop();</div><div class="line">		<span class="keyword">if</span> (current-&gt;left)</div><div class="line">			unvisted.push(current-&gt;left);</div><div class="line">		<span class="keyword">if</span> (current-&gt;right)</div><div class="line">			unvisted.push(current-&gt;right);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; current-&gt;value &lt;&lt; <span class="string">" "</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> bst::insert(<span class="keyword">const</span> <span class="keyword">int</span>&amp; val) &#123;</div><div class="line">	<span class="keyword">if</span> (capacity == <span class="number">0</span>)</div><div class="line">		root = <span class="keyword">new</span> TreeNode(val);</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		TreeNode* newNode = <span class="keyword">new</span> TreeNode(val);</div><div class="line">		TreeNode* current = root;</div><div class="line">		<span class="keyword">while</span> (current) &#123;</div><div class="line">			<span class="keyword">if</span> (val &lt;= current-&gt;value) &#123;</div><div class="line">				<span class="keyword">if</span> (!current-&gt;left) &#123;</div><div class="line">					current-&gt;left = newNode;</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span></div><div class="line">					current = current-&gt;left;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span> &#123;</div><div class="line">				<span class="keyword">if</span> (!current-&gt;right) &#123;</div><div class="line">					current-&gt;right = newNode;</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span></div><div class="line">					current = current-&gt;right;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;	</div><div class="line">	capacity++;</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> bst::erase(<span class="keyword">const</span> <span class="keyword">int</span>&amp; val) &#123;</div><div class="line">	TreeNode* current = root;</div><div class="line">	TreeNode* target = root;</div><div class="line">	<span class="keyword">int</span> pos;</div><div class="line">	<span class="keyword">while</span> (current) &#123;</div><div class="line">		<span class="keyword">if</span> (val &lt;= current-&gt;value) &#123;</div><div class="line">			<span class="keyword">if</span> (current-&gt;left)</div><div class="line">				<span class="keyword">if</span> (val == current-&gt;left-&gt;value) &#123;</div><div class="line">					target = current-&gt;left;<span class="comment">//left=0;</span></div><div class="line">					pos = <span class="number">0</span>;</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span></div><div class="line">					current = current-&gt;left;</div><div class="line">			<span class="keyword">else</span></div><div class="line">				<span class="keyword">return</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">if</span> (current-&gt;right)</div><div class="line">				<span class="keyword">if</span> (val == current-&gt;right-&gt;value) &#123;</div><div class="line">					target = current-&gt;right;</div><div class="line">					pos = <span class="number">1</span>;<span class="comment">//right=1;</span></div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span></div><div class="line">					current = current-&gt;right;</div><div class="line">			<span class="keyword">else</span></div><div class="line">				<span class="keyword">return</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//cout &lt;&lt; current-&gt;value &lt;&lt; endl;</span></div><div class="line">	&#125;</div><div class="line">	<span class="comment">//target 为要删除的目标</span></div><div class="line">	<span class="comment">//current 为它的父节点</span></div><div class="line">	<span class="keyword">if</span> (!target-&gt;left) &#123;</div><div class="line">		<span class="keyword">if</span> (!target-&gt;right) &#123;</div><div class="line">			<span class="keyword">if</span> (pos)</div><div class="line">				current-&gt;right = <span class="literal">NULL</span>;</div><div class="line">			<span class="keyword">else</span></div><div class="line">				current-&gt;left = <span class="literal">NULL</span>;</div><div class="line">			capacity--;</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			TreeNode* rmin = target-&gt;right;<span class="comment">//rch min element</span></div><div class="line">			TreeNode* pmin = target;</div><div class="line">			<span class="keyword">while</span> (rmin-&gt;left) &#123;</div><div class="line">				pmin = rmin;</div><div class="line">				rmin = rmin-&gt;left;</div><div class="line">			&#125;</div><div class="line">			pmin-&gt;left = <span class="literal">NULL</span>;</div><div class="line">			<span class="keyword">if</span> (rmin != target-&gt;right)</div><div class="line">				rmin-&gt;right = target-&gt;right;</div><div class="line">			<span class="keyword">if</span> (pos)</div><div class="line">				current-&gt;right = rmin;</div><div class="line">			<span class="keyword">else</span></div><div class="line">				current-&gt;left = rmin;</div><div class="line">			capacity--;</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//target有左子树</span></div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="comment">//找到左子树的max</span></div><div class="line">		TreeNode* lmax = target-&gt;left;<span class="comment">//rch min element</span></div><div class="line">		TreeNode* pmax = target-&gt;left;</div><div class="line">		<span class="keyword">while</span> (lmax-&gt;right) &#123;</div><div class="line">			pmax = lmax;</div><div class="line">			lmax = lmax-&gt;right;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//存在右子树</span></div><div class="line">		pmax-&gt;right = <span class="literal">NULL</span>;</div><div class="line">		<span class="keyword">if</span> (lmax != target-&gt;left)</div><div class="line">			lmax-&gt;left = target-&gt;left;</div><div class="line">		<span class="keyword">if</span>(target-&gt;right)</div><div class="line">			lmax-&gt;right = target-&gt;right;</div><div class="line">		<span class="keyword">if</span> (pos)</div><div class="line">			current-&gt;right = lmax;</div><div class="line">		<span class="keyword">else</span></div><div class="line">			current-&gt;left = lmax;</div><div class="line">		capacity--;</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></li>
 </ul>
 
-      <script>
-        window.disqusProxy={
-          shortname: 'persuing',
-          username: 'persuing',
-          server: 'disqus-proxy.sdu1901.top',
-          port: 443,
-          adminAvatar: '/avatars/admin-avatar.jpg',
-          identifier: '2017/10/22/BFS/',
-        };
-        window.disqus_config = function () {
-          this.page.url = window.location.href;
-          this.page.identifier = window.disqusProxy.identifier;
-        };
-      </script>
       
     </div>
     
@@ -469,21 +454,11 @@
   
     <div class="comments" id="comments">
       
-      <script src="//cdn.bootcss.com/react/16.0.0/umd/react.production.min.js"></script>
-      <script src="//cdn.bootcss.com/react-dom/16.0.0/umd/react-dom.production.min.js"></script>
-      <script src="//cdn.bootcss.com/fetch/2.0.3/fetch.min.js"></script>
-      <script src="//cdn.jsdelivr.net/npm/blockies-identicon@0.1.0/blockies.min.js"></script>
-      <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-      <div id="disqus_proxy_thread"><script src="/scripts/hexo-disqus-proxy-primary.js" async></script>
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
+        <div id="gitment-container"></div>
+      
     </div>
 
   
-
 
 
         </div>
@@ -738,23 +713,12 @@
 
   
 
-    
-      <script id="dsq-count-scr" src="https://persuing.disqus.com/count.js" async></script>
-    
 
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://Persuingsdu.github.io/2017/10/22/BFS/';
-          this.page.identifier = '2017/10/22/BFS/';
-          this.page.title = 'BST';
-        };
-        var d = document, s = d.createElement('script');
-        
-        s.setAttribute('data-timestamp', '' + +new Date());
-        
-      </script>
-    
+
+
+
+
+
 
   
 
@@ -764,80 +728,47 @@
 
 
 
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'Persuingsdu',
+            repo: 'Persuingsdu.github.io',
+            
+            lang: "en" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '60a92a4cd94a581e47ed0b756e0cff5494c16c38',
+            
+                client_id: '3d578462b885f8bb9d71'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
 
 
 
 
 
 
-
-
-
-
-    <link rel="stylesheet" href="/disqus/dist/iDisqus.min.css" />
-    <script src="/disqus/dist/iDisqus.min.js"></script>
-    <script>
-        var emojiList = [{
-            code:'smile',
-            title:'笑脸',
-            unicode:'1f604'
-        },{
-            code:'mask',
-            title:'生病',
-            unicode:'1f637'
-        },{
-            code:'joy',
-            title:'破涕为笑',
-            unicode:'1f602'
-        },{
-            code:'stuck_out_tongue_closed_eyes',
-            title:'吐舌',
-            unicode:'1f61d'
-        },{
-            code:'flushed',
-            title:'脸红',
-            unicode:'1f633'
-        },{
-            code:'scream',
-            title:'恐惧',
-            unicode:'1f631'
-        },{
-            code:'pensive',
-            title:'失望',
-            unicode:'1f614'
-        },{
-            code:'unamused',
-            title:'无语',
-            unicode:'1f612'
-        },{
-            code:'grin',
-            title:'露齿笑',
-            unicode:'1f601'
-        },{
-            code:'heart_eyes',
-            title:'色',
-            unicode:'1f60d'
-        },{
-            code:'sweat',
-            title:'汗',
-            unicode:'1f613'
-        },{
-            code:'smirk',
-            title:'得意',
-            unicode:'1f60f'
-        }];
-        var disq = new iDisqus('comments', {
-            forum: 'persuing',
-            site: 'http://sdu1901.top',
-            api: 'http://sdu1901.top/disqus/api',
-            mode: 2,
-            badge: '博主',
-            timeout: 3000,
-            init: true,
-            emoji_list: emojiList
-        });
-        disq.count();
-    </script>
 
 
   

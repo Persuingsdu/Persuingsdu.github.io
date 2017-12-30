@@ -338,8 +338,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/12/24/Heap/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/12/24/Heap/" itemprop="commentCount"></span>
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2017/12/24/Heap/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -377,20 +376,6 @@
 <p><strong>删除</strong><br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="keyword">void</span> maxHeap::pop() &#123;</div><div class="line">	<span class="keyword">if</span> (!root)<span class="comment">//空堆</span></div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	heapNode* lastChild = pars.back();</div><div class="line">	root-&gt;element = lastChild-&gt;element;<span class="comment">//替换</span></div><div class="line">	heapNode* p = lastChild-&gt;parent;</div><div class="line">	<span class="keyword">if</span> (p == root &amp;&amp; heapSize==<span class="number">1</span> ) &#123;<span class="comment">//本身</span></div><div class="line">		root = <span class="literal">NULL</span>;</div><div class="line">		heapSize--;</div><div class="line">		childNumber = <span class="number">0</span>;</div><div class="line">		pars.pop_back();<span class="comment">//删除</span></div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (childNumber == <span class="number">0</span>) &#123;<span class="comment">//满了</span></div><div class="line">		p-&gt;right = <span class="literal">NULL</span>;</div><div class="line">		pars.push_front(p);<span class="comment">//添加节点</span></div><div class="line">		heapSize--;</div><div class="line">		childNumber = <span class="number">1</span>;</div><div class="line">		pars.pop_back();<span class="comment">//删除</span></div><div class="line">		lastChild = pars.back();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		p-&gt;left = <span class="literal">NULL</span>;</div><div class="line">		heapSize--;</div><div class="line">		childNumber--;</div><div class="line">		pars.pop_back();</div><div class="line">		lastChild = pars.back();</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//自上而下地进行更新</span></div><div class="line">	heapNode* current = root;</div><div class="line">	<span class="keyword">while</span> (current-&gt;left&amp;&amp;current-&gt;right) &#123;</div><div class="line">		heapNode* tempt = (current-&gt;left-&gt;element &gt; current-&gt;right-&gt;element) </div><div class="line">			               ? current-&gt;left : current-&gt;right;<span class="comment">//数值较大者</span></div><div class="line">		<span class="keyword">if</span> (current-&gt;element &gt; tempt-&gt;element)</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		<span class="keyword">int</span> value = tempt-&gt;element;</div><div class="line">		tempt-&gt;element = current-&gt;element;</div><div class="line">		current-&gt;element = value;</div><div class="line">		current = tempt;<span class="comment">//替换更新</span></div><div class="line">	&#125;</div><div class="line">	<span class="comment">//数值交换</span></div><div class="line">	<span class="keyword">if</span> (current-&gt;left&amp;&amp;current-&gt;left-&gt;element &gt; current-&gt;element) &#123;</div><div class="line">		<span class="keyword">int</span> leftTempt = current-&gt;left-&gt;element;</div><div class="line">		current-&gt;left-&gt;element = current-&gt;element;</div><div class="line">		current-&gt;element = leftTempt;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>初始化一个大根堆<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="comment">//建立一个大根堆</span></div><div class="line"><span class="comment">//先建立一个用链表表示的堆，然后进行调整</span></div><div class="line"><span class="keyword">void</span> maxHeap::initialize(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</div><div class="line">	<span class="keyword">if</span> (nums.empty())</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	<span class="comment">//建立一棵树</span></div><div class="line">	<span class="built_in">stack</span>&lt;heapNode*&gt; pNodes;<span class="comment">//用于保存所有的父节点</span></div><div class="line">	root = <span class="keyword">new</span> heapNode(nums[<span class="number">0</span>], <span class="literal">NULL</span>);</div><div class="line">	root-&gt;parent = root;</div><div class="line">	childNumber = <span class="number">0</span>;</div><div class="line">	heapSize++;</div><div class="line">	pars.push_back(root);</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.size(); i++) &#123;</div><div class="line">		heapNode* p = pars.front();</div><div class="line">		heapNode* newNode = <span class="keyword">new</span> heapNode(nums[i], p);</div><div class="line">		heapSize++;</div><div class="line">		pars.push_back(newNode);</div><div class="line">		<span class="keyword">if</span> (childNumber == <span class="number">0</span>)<span class="comment">//左节点</span></div><div class="line">			p-&gt;left = newNode;</div><div class="line">		<span class="keyword">if</span> (childNumber == <span class="number">1</span>)<span class="comment">//右节点</span></div><div class="line">			p-&gt;right = newNode;</div><div class="line">		childNumber++;</div><div class="line">		<span class="keyword">if</span> (childNumber == <span class="number">2</span>) &#123;</div><div class="line">			pNodes.push(pars.front());<span class="comment">//将满孩子的节点存进去</span></div><div class="line">			pars.pop_front();</div><div class="line">			childNumber = <span class="number">0</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//对树进行自上而下的调整</span></div><div class="line">	<span class="keyword">if</span> (pars.front()-&gt;left)</div><div class="line">		pNodes.push(pars.front());</div><div class="line">	<span class="keyword">while</span> (!pNodes.empty()) &#123;<span class="comment">//check 所有的父节点</span></div><div class="line">		heapNode* current = pNodes.top();</div><div class="line">		pNodes.pop();</div><div class="line">		<span class="keyword">while</span> (current-&gt;left&amp;&amp;current-&gt;right) &#123;</div><div class="line">			heapNode* tempt = (current-&gt;left-&gt;element &gt; current-&gt;right-&gt;element)</div><div class="line">				? current-&gt;left : current-&gt;right;<span class="comment">//数值较大者</span></div><div class="line">			<span class="keyword">if</span> (current-&gt;element &gt; tempt-&gt;element)</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			<span class="keyword">int</span> value = tempt-&gt;element;</div><div class="line">			tempt-&gt;element = current-&gt;element;</div><div class="line">			current-&gt;element = value;</div><div class="line">			current = tempt;<span class="comment">//替换更新</span></div><div class="line">		&#125;</div><div class="line">		<span class="comment">//数值交换</span></div><div class="line">		<span class="keyword">if</span> (current-&gt;left&amp;&amp;current-&gt;left-&gt;element &gt; current-&gt;element) &#123;</div><div class="line">			<span class="keyword">int</span> leftTempt = current-&gt;left-&gt;element;</div><div class="line">			current-&gt;left-&gt;element = current-&gt;element;</div><div class="line">			current-&gt;element = leftTempt;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
-      <script>
-        window.disqusProxy={
-          shortname: 'persuing',
-          username: 'persuing',
-          server: 'disqus-proxy.sdu1901.top',
-          port: 443,
-          adminAvatar: '/avatars/admin-avatar.jpg',
-          identifier: '2017/12/24/Heap/',
-        };
-        window.disqus_config = function () {
-          this.page.url = window.location.href;
-          this.page.identifier = window.disqusProxy.identifier;
-        };
-      </script>
       
     </div>
     
@@ -464,21 +449,11 @@
   
     <div class="comments" id="comments">
       
-      <script src="//cdn.bootcss.com/react/16.0.0/umd/react.production.min.js"></script>
-      <script src="//cdn.bootcss.com/react-dom/16.0.0/umd/react-dom.production.min.js"></script>
-      <script src="//cdn.bootcss.com/fetch/2.0.3/fetch.min.js"></script>
-      <script src="//cdn.jsdelivr.net/npm/blockies-identicon@0.1.0/blockies.min.js"></script>
-      <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-      <div id="disqus_proxy_thread"><script src="/scripts/hexo-disqus-proxy-primary.js" async></script>
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
+        <div id="gitment-container"></div>
+      
     </div>
 
   
-
 
 
         </div>
@@ -733,23 +708,12 @@
 
   
 
-    
-      <script id="dsq-count-scr" src="https://persuing.disqus.com/count.js" async></script>
-    
 
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://Persuingsdu.github.io/2017/12/24/Heap/';
-          this.page.identifier = '2017/12/24/Heap/';
-          this.page.title = 'Heap';
-        };
-        var d = document, s = d.createElement('script');
-        
-        s.setAttribute('data-timestamp', '' + +new Date());
-        
-      </script>
-    
+
+
+
+
+
 
   
 
@@ -759,80 +723,47 @@
 
 
 
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'Persuingsdu',
+            repo: 'Persuingsdu.github.io',
+            
+            lang: "en" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '60a92a4cd94a581e47ed0b756e0cff5494c16c38',
+            
+                client_id: '3d578462b885f8bb9d71'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
 
 
 
 
 
 
-
-
-
-
-    <link rel="stylesheet" href="/disqus/dist/iDisqus.min.css" />
-    <script src="/disqus/dist/iDisqus.min.js"></script>
-    <script>
-        var emojiList = [{
-            code:'smile',
-            title:'笑脸',
-            unicode:'1f604'
-        },{
-            code:'mask',
-            title:'生病',
-            unicode:'1f637'
-        },{
-            code:'joy',
-            title:'破涕为笑',
-            unicode:'1f602'
-        },{
-            code:'stuck_out_tongue_closed_eyes',
-            title:'吐舌',
-            unicode:'1f61d'
-        },{
-            code:'flushed',
-            title:'脸红',
-            unicode:'1f633'
-        },{
-            code:'scream',
-            title:'恐惧',
-            unicode:'1f631'
-        },{
-            code:'pensive',
-            title:'失望',
-            unicode:'1f614'
-        },{
-            code:'unamused',
-            title:'无语',
-            unicode:'1f612'
-        },{
-            code:'grin',
-            title:'露齿笑',
-            unicode:'1f601'
-        },{
-            code:'heart_eyes',
-            title:'色',
-            unicode:'1f60d'
-        },{
-            code:'sweat',
-            title:'汗',
-            unicode:'1f613'
-        },{
-            code:'smirk',
-            title:'得意',
-            unicode:'1f60f'
-        }];
-        var disq = new iDisqus('comments', {
-            forum: 'persuing',
-            site: 'http://sdu1901.top',
-            api: 'http://sdu1901.top/disqus/api',
-            mode: 2,
-            badge: '博主',
-            timeout: 3000,
-            init: true,
-            emoji_list: emojiList
-        });
-        disq.count();
-    </script>
 
 
   
