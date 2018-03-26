@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://Persuingsdu.github.io/"/>
-  <updated>2018-03-25T09:19:55.573Z</updated>
+  <updated>2018-03-26T08:11:33.888Z</updated>
   <id>http://Persuingsdu.github.io/</id>
   
   <author>
@@ -15,30 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>CSS笔记</title>
-    <link href="http://Persuingsdu.github.io/2018/03/25/CSS%E7%AC%94%E8%AE%B0/"/>
-    <id>http://Persuingsdu.github.io/2018/03/25/CSS笔记/</id>
-    <published>2018-03-25T08:38:31.000Z</published>
-    <updated>2018-03-25T09:19:55.573Z</updated>
-    
-    <content type="html"><![CDATA[<p>以下内容源于<a href="http://www.w3school.com.cn/css/css_background.asp" target="_blank" rel="external">W3School CSS教程</a></p><p>##CSS样式<br><strong>CSS背景</strong><br>背景色：background-color  p {background-color: gray; padding: 20px;}<br>背景图像：background-img body {background-image: url(/i/eg_bg_04.gif);}<br>背景重复： background-repeat:no-repeat repeat-x repeat-y<br>背景定位：background-position:top、bottom、left、right 和 center<br>背景关联：background-attachment:fixed<br><strong>CSS文本</strong></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;以下内容源于&lt;a href=&quot;http://www.w3school.com.cn/css/css_background.asp&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;W3School CSS教程&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;##CSS样式&lt;br&gt;&lt;st
-      
-    
-    </summary>
-    
-    
-      <category term="css" scheme="http://Persuingsdu.github.io/tags/css/"/>
-    
-  </entry>
   
   <entry>
     <title>基本的图算法</title>
