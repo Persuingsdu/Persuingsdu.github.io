@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://Persuingsdu.github.io/"/>
-  <updated>2018-04-17T11:25:43.638Z</updated>
+  <updated>2018-05-26T08:42:20.196Z</updated>
   <id>http://Persuingsdu.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据库课程设计</title>
+    <link href="http://Persuingsdu.github.io/2018/05/26/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1/"/>
+    <id>http://Persuingsdu.github.io/2018/05/26/数据库课程设计/</id>
+    <published>2018-05-26T08:34:45.000Z</published>
+    <updated>2018-05-26T08:42:20.196Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"><p>好久没有更新了，最近在写数据库课设。<br>主要使用了<code>Flask</code>和<code>Bootstrap</code><br>数据来源豆瓣读书<br>刚刚大致写了下图书检索的页面，后期再做修改。<br>先放一下，复习其它科目。<br><img src="/img/进程.png" alt="登陆"><br><img src="/img/书目.png" alt="检索"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css&quot;&gt;&lt;p&gt;好久没有更新了，最近在写数据库课设。&lt;br&gt;主要使用
+      
+    
+    </summary>
+    
+    
+      <category term="数据库" scheme="http://Persuingsdu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
   
   <entry>
     <title>BeautifulSoup</title>
